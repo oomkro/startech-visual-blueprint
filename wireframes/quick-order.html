@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>StarTech.com - Quick order pad (rebuilt)</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css"><link rel="stylesheet" href="shell.css">
+<style>
+  .util{display:flex;align-items:center;justify-content:flex-end;gap:24px;padding:10px var(--container-padding);font-family:var(--font-subtitle-family);font-size:11px;letter-spacing:.3px;text-transform:uppercase;color:var(--color-foreground-secondary);}
+  .util a{color:inherit;text-decoration:none;}
+  .wrap{max-width:1060px;margin-inline:auto;padding:34px var(--container-padding) 64px;}
+  .signed{font-family:var(--font-subtitle-family);font-size:11px;letter-spacing:.3px;text-transform:uppercase;color:var(--color-foreground-secondary);margin-bottom:12px;}
+  .lead{color:var(--color-foreground-secondary);max-width:62ch;margin:12px 0 26px;}
+  .grid{display:flex;flex-direction:column;gap:32px;}
+  .grid>div:first-child{max-width:680px;}
+  .parsed-head{margin-top:2px;}
+  .entry-tabs{display:inline-flex;gap:6px;margin-bottom:16px;}
+  .etab{padding:9px 16px;border-radius:var(--border-radius-button);border:.5px solid var(--color-border);font-family:var(--font-button-family);font-size:12px;letter-spacing:.3px;text-transform:uppercase;color:var(--color-foreground-secondary);}
+  .etab.on{background:var(--color-button);color:var(--color-button-text);border-color:var(--color-button);}
+  textarea.paste{width:100%;height:196px;resize:none;border:1px solid var(--color-border-input);background:var(--color-background-input);border-radius:var(--border-radius-main);padding:14px 16px;font-family:'Roboto Mono',monospace;font-size:13px;line-height:1.7;color:var(--color-foreground);}
+  .paste-foot{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:10px;}
+  .hint{font-size:11px;color:var(--color-foreground-secondary);}
+  .tmpl{font-family:var(--font-button-family);font-size:11px;letter-spacing:.3px;text-transform:uppercase;color:var(--color-foreground);white-space:nowrap;}
+  .parse-btn{margin-top:16px;width:100%;}
+  /* parsed result */
+  .parsed-head{display:flex;align-items:center;gap:10px;margin-bottom:14px;font-family:var(--font-subtitle-family);font-size:12px;letter-spacing:.3px;text-transform:uppercase;}
+  .parsed-head .ok{color:var(--color-success-text);} .parsed-head .err{color:var(--color-error-text);} .parsed-head .muted{color:var(--color-foreground-secondary);}
+  .qtable{border:1px solid var(--color-border);border-radius:var(--border-radius-main);overflow:hidden;}
+  .cols{display:grid;grid-template-columns:1.1fr 2fr 60px 96px 120px;}
+  .qtable .hr{background:var(--color-background-tertiary);}
+  .qtable .hr span{padding:11px 12px;font-family:var(--font-subtitle-family);font-size:10px;letter-spacing:.3px;text-transform:uppercase;color:var(--color-foreground-secondary);}
+  .qr{border-top:1px solid var(--color-border);align-items:center;}
+  .qr .c{padding:11px 12px;font-size:var(--font-size-body-s);}
+  .qr .part{font-family:'Roboto Mono',monospace;}
+  .qr .muted{color:var(--color-foreground-secondary);}
+  .qr.errrow{background:var(--color-error-background);}
+  .status{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-subtitle-family);font-size:10px;letter-spacing:.3px;text-transform:uppercase;}
+  .status.ok{color:var(--color-success-text);} .status.err{color:var(--color-error-text);}
+  .foot{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-top:22px;padding-top:20px;border-top:1px solid var(--color-border);}
+  .foot .sum{font-size:var(--font-size-body-s);color:var(--color-foreground-secondary);} .foot .sum b{color:var(--color-foreground-title);font-size:var(--font-size-heading-h4);margin-left:8px;}
+  @media(max-width:749px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+  <div class="util"><a>🌐 United States ▾</a><a>English ▾</a><a>Drivers &amp; Downloads</a><a>Acme Corp ▾</a><a>Cart (0)</a></div>
+  <div class="nav"><div class="nav__card">
+    <div class="nav__left"><a class="nav__logo">StarTech.com</a><nav class="nav__list"><a class="nav__item">Product</a><a class="nav__item">Quick order</a><a class="nav__item">Support</a><a class="nav__item">Learn</a></nav></div>
+    <div class="nav__right"><span style="opacity:.6">🔍 Search anything</span><a class="btn btn--tertiary">Get a volume quote</a></div>
+  </div></div>
+
+  <!-- QUICK ORDER PAD - Makro wholesale Quick Order Pad pattern, married with REQ-01-11 -->
+  <div class="wrap">
+    <p class="signed">Signed in · Acme Corp · Net-30</p>
+    <h1 class="ws-h2">Quick order</h1>
+    <p class="lead">Already have your part numbers? Paste a list or upload a file.</p>
+
+    <div class="grid">
+      <!-- input: tabbed paste / upload -->
+      <div>
+        <div class="entry-tabs"><span class="etab on">Paste a list</span><span class="etab">Upload a file</span></div>
+        <textarea class="paste">DK31C2DHSPD, 50
+USB31CCV50CM, 50
+DK30C-OLD, 25
+DP14VMM2M, 100</textarea>
+        <div class="paste-foot"><span class="hint">One per line: SKU,qty · SKU qty · or just SKU. Cmd/Ctrl + Enter to parse.</span><a class="tmpl">⬇ CSV template</a></div>
+        <button class="btn btn--primary parse-btn">Parse list</button>
+      </div>
+
+      <!-- parsed validation -->
+      <div>
+        <div class="parsed-head"><span class="muted">4 lines ·</span><span class="ok">3 matched</span><span class="muted">·</span><span class="err">1 not found</span></div>
+        <div class="qtable">
+          <div class="hr cols"><span>Part number</span><span>Description</span><span>Qty</span><span>Unit</span><span>Status</span></div>
+          <div class="qr cols"><div class="c part">DK31C2DHSPD</div><div class="c muted">Triple 4K USB-C Docking Station</div><div class="c">50</div><div class="c">$177.99</div><div class="c"><span class="status ok">✓ Matched</span></div></div>
+          <div class="qr cols"><div class="c part">USB31CCV50CM</div><div class="c muted">USB-C Cable, 10Gbps, 100W, 50cm</div><div class="c">50</div><div class="c">$21.51</div><div class="c"><span class="status ok">✓ Matched</span></div></div>
+          <div class="qr cols errrow"><div class="c part">DK30C-OLD</div><div class="c muted">Not found, check for a replacement</div><div class="c">25</div><div class="c">-</div><div class="c"><span class="status err">✕ No match</span></div></div>
+          <div class="qr cols"><div class="c part">DP14VMM2M</div><div class="c muted">DisplayPort 1.4 Cable, 8K, 2m</div><div class="c">100</div><div class="c">$19.46</div><div class="c"><span class="status ok">✓ Matched</span></div></div>
+        </div>
+        <div class="foot">
+          <div class="sum">Matched subtotal · 200 items <b>$11,921.00</b></div>
+          <button class="btn btn--primary">Add matched to cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

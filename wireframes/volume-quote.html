@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>StarTech.com - Volume quote (elevated)</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css"><link rel="stylesheet" href="shell.css">
+<style>
+  .util{display:flex;align-items:center;justify-content:flex-end;gap:24px;padding:10px var(--container-padding);font-family:var(--font-subtitle-family);font-size:11px;letter-spacing:.3px;text-transform:uppercase;color:var(--color-foreground-secondary);}
+  .util a{color:inherit;text-decoration:none;}
+  .form-wrap{max-width:920px;margin-inline:auto;padding:36px var(--container-padding) 72px;}
+  .lead{color:var(--color-foreground-secondary);max-width:56ch;margin:14px 0 8px;font-size:var(--font-size-body);}
+  .steps{display:flex;gap:10px;align-items:center;margin:26px 0 34px;font-family:var(--font-subtitle-family);font-size:11px;letter-spacing:.3px;text-transform:uppercase;color:var(--color-foreground-tertiary);}
+  .steps b{color:var(--color-foreground-title);} .steps .on{color:var(--color-foreground-title);}
+  .steps .d{width:22px;height:1px;background:var(--color-border);}
+  .block{margin-bottom:40px;}
+  .block .h{font-family:var(--font-subtitle-family);font-size:12px;letter-spacing:.3px;text-transform:uppercase;color:var(--color-foreground-secondary);margin-bottom:16px;}
+  .paths{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+  .pathcard{border:1px solid var(--color-border);border-radius:var(--border-radius-main);padding:20px;background:var(--color-background-secondary);position:relative;}
+  .pathcard.sel{border-color:var(--color-button);box-shadow:0 0 0 1px var(--color-button);}
+  .pathcard .r{width:18px;height:18px;border-radius:50%;border:1px solid var(--color-border);position:absolute;top:18px;right:18px;}
+  .pathcard.sel .r{border-color:var(--color-button);background:var(--color-button);box-shadow:inset 0 0 0 3px var(--color-background-secondary);}
+  .pathcard h3{font-size:16px;margin:0 0 6px;} .pathcard p{margin:0;font-size:12px;color:var(--color-foreground-secondary);line-height:1.4;}
+  .fields{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  .field label{display:block;font-family:var(--font-subtitle-family);font-size:10px;letter-spacing:.3px;text-transform:uppercase;color:var(--color-foreground-secondary);margin-bottom:7px;}
+  .field .in{height:46px;border:1px solid var(--color-border-input);background:var(--color-background-input);border-radius:var(--border-radius-main);padding:0 14px;display:flex;align-items:center;color:var(--color-foreground-tertiary);font-size:var(--font-size-body-s);}
+  .field.full{grid-column:1/-1;}
+  /* product entry: three ways */
+  .entry-tabs{display:inline-flex;gap:6px;margin-bottom:16px;}
+  .etab{padding:9px 16px;border-radius:var(--border-radius-button);border:.5px solid var(--color-border);font-family:var(--font-button-family);font-size:12px;letter-spacing:.3px;text-transform:uppercase;color:var(--color-foreground-secondary);}
+  .etab.on{background:var(--color-button);color:var(--color-button-text);border-color:var(--color-button);}
+  .ptable{border:1px solid var(--color-border);border-radius:var(--border-radius-main);overflow:hidden;}
+  .ptable .hr{display:grid;grid-template-columns:1fr 140px 44px;background:var(--color-background-tertiary);}
+  .ptable .hr span{padding:12px 16px;font-family:var(--font-subtitle-family);font-size:10px;letter-spacing:.3px;text-transform:uppercase;color:var(--color-foreground-secondary);}
+  .ptable .pr{display:grid;grid-template-columns:1fr 140px 44px;border-top:1px solid var(--color-border);}
+  .ptable .pr .c{padding:10px 12px;} .ptable .pr .c .in{height:38px;border:1px solid var(--color-border-input);background:var(--color-background-input);border-radius:6px;padding:0 12px;display:flex;align-items:center;color:var(--color-foreground-tertiary);font-size:var(--font-size-body-s);}
+  .ptable .pr .del{display:flex;align-items:center;justify-content:center;color:var(--color-foreground-tertiary);}
+  .addline{margin-top:12px;display:inline-flex;align-items:center;gap:8px;font-family:var(--font-button-family);font-size:12px;letter-spacing:.3px;text-transform:uppercase;color:var(--color-foreground);}
+  .paste-hint{margin-top:12px;font-size:12px;color:var(--color-foreground-secondary);}
+  .copybox{display:inline-flex;align-items:center;gap:10px;margin:8px 0 18px;font-size:var(--font-size-body-s);color:var(--color-foreground);}
+  .copybox .cb{width:16px;height:16px;border:1px solid var(--color-border);border-radius:4px;background:var(--color-background-secondary);}
+  .submitrow{display:flex;align-items:center;gap:20px;margin-top:12px;}
+  .submitrow .note{font-size:12px;color:var(--color-foreground-secondary);max-width:44ch;}
+  @media(max-width:749px){.paths{grid-template-columns:1fr 1fr}.fields{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+  <div class="util"><a>🌐 United States ▾</a><a>English ▾</a><a>Drivers &amp; Downloads</a><a>Log in</a><a>Cart (0)</a></div>
+  <div class="nav"><div class="nav__card">
+    <div class="nav__left"><a class="nav__logo">StarTech.com</a><nav class="nav__list"><a class="nav__item">Product</a><a class="nav__item">Support</a><a class="nav__item">Who We Are</a><a class="nav__item">Learn</a></nav></div>
+    <div class="nav__right"><span style="opacity:.6">🔍 Search anything</span><a class="btn btn--tertiary">Where to buy</a></div>
+  </div></div>
+
+  <!-- VOLUME QUOTE - elevated: request-type first, then only that path's fields, with bulk entry -->
+  <div class="form-wrap">
+    <h1 class="ws-h2">Request a volume quote</h1>
+    <p class="lead">Request a bulk quote from our sales team. No account needed.</p>
+    <div class="steps"><span class="on">1 · Who it is for</span><span class="d"></span><span class="on">2 · Your details</span><span class="d"></span><span>3 · Products</span></div>
+
+    <div class="block">
+      <div class="h">Who is this quote for?</div>
+      <div class="paths">
+        <div class="pathcard sel"><span class="r"></span><h3>Corporation</h3><p>A business buying for its own use.</p></div>
+        <div class="pathcard"><span class="r"></span><h3>Public Sector</h3><p>Government, education, or healthcare.</p></div>
+        <div class="pathcard"><span class="r"></span><h3>Distributor</h3><p>Reselling to other businesses.</p></div>
+        <div class="pathcard"><span class="r"></span><h3>Solution Provider</h3><p>Integrator, with deal registration.</p></div>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="h">Your details</div>
+      <div class="fields">
+        <div class="field"><label>First name*</label><div class="in"></div></div>
+        <div class="field"><label>Last name*</label><div class="in"></div></div>
+        <div class="field"><label>Work email*</label><div class="in"></div></div>
+        <div class="field"><label>Phone*</label><div class="in"></div></div>
+        <div class="field"><label>Company*</label><div class="in"></div></div>
+        <div class="field"><label>Country* (autofills from location)</label><div class="in">United States</div></div>
+        <div class="field full"><label>Preferred solution provider (optional)</label><div class="in"></div></div>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="h">Which products? · qualifying minimum, total order value at list price: 3,000 USD · 3,000 CAD · 2,500 EUR · 2,000 GBP</div>
+      <div class="entry-tabs"><span class="etab on">Add line by line</span><span class="etab">Paste a list</span><span class="etab">Upload CSV</span></div>
+      <div class="ptable">
+        <div class="hr"><span>Product ID</span><span>Quantity</span><span></span></div>
+        <div class="pr"><div class="c"><div class="in">DK31C2DHSPD</div></div><div class="c"><div class="in">250</div></div><div class="del">✕</div></div>
+        <div class="pr"><div class="c"><div class="in">DK30CH2DPPD</div></div><div class="c"><div class="in">250</div></div><div class="del">✕</div></div>
+        <div class="pr"><div class="c"><div class="in" style="color:var(--color-foreground-tertiary);opacity:.5">Add a Product ID</div></div><div class="c"><div class="in"></div></div><div class="del"></div></div>
+      </div>
+      <span class="addline">＋ Add another line</span>
+      <p class="paste-hint">Or paste a list or upload a CSV, one Product ID and quantity per line.</p>
+    </div>
+
+    <label class="copybox"><span class="cb"></span> Email me a copy of my request</label>
+    <div class="submitrow"><button class="btn btn--primary">Submit request</button><span class="note">Your request will be reviewed by our Sales team, who will follow up shortly.</span></div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,284 @@
+/* =============================================================================
+   Makro Base Theme — Design Tokens
+   Extracted from Figma "🎨 Style Guide/Tokens" (page 0:1) via Dev Mode MCP.
+   Source of truth: Figma variables + token documentation frames.
+
+   Layers:
+     1. Core palette          (raw brand colors)
+     2. Semantic color schemes (4 modes; scheme 1 = default on :root)
+     3. Typography
+     4. Spacing / layout
+     5. Radius / shadow / opacity
+   ============================================================================= */
+
+:root {
+  /* ---------------------------------------------------------------------------
+     1. CORE PALETTE (raw values — do not use directly in components)
+     --------------------------------------------------------------------------- */
+  --color-black: #090909;          /* Primary/Black */
+  --color-white: #fcfbfa;          /* Primary/White (off-white) */
+  --color-white-pure: #ffffff;
+  --color-red: #ff4545;
+  --color-grey-3: #e5e2df;         /* Grey Shades/Grey 3 (hairline borders) */
+
+  /* ---------------------------------------------------------------------------
+     2. SEMANTIC COLORS — Scheme 1 (DEFAULT: light, grey background)
+     --------------------------------------------------------------------------- */
+  --color-background: #f9f9f9;
+  --color-background-secondary: #ffffff;
+  --color-background-tertiary: #efefea;
+  --color-gradient-background: #f9f9f9;
+
+  --color-foreground: #3f3f3f;
+  --color-foreground-secondary: #6a6a6a;
+  --color-foreground-tertiary: #727272;
+  --color-foreground-title: #3f3f3f;
+
+  --color-button: #090909;
+  --color-button-hover: #3f3f3f;
+  --color-button-text: #ffffff;
+  --color-button-text-hover: #ffffff;
+  --color-button-secondary-background: #3f3f3f;
+  --color-button-secondary-background-hover: #090909;
+  --color-button-secondary-text: #ffffff;
+  --color-button-secondary-text-hover: #ffffff;
+  --color-button-tertiary-background: #f1f1f1;
+  --color-button-tertiary-background-hover: #eeeeee;
+  --color-button-tertiary-text: #3f3f3f;
+  --color-button-tertiary-text-hover: #3f3f3f;
+
+  --color-card-price-new: #3f3f3f;
+  --color-card-price-old: #737373;
+
+  --color-accent: #3f3f3f;
+  --color-overlay: #ffffff;
+  --color-border: #e6e6e6;
+
+  --color-badge-background: #2e69fd;
+  --color-badge-text: #ffffff;
+
+  --color-error-text: #e72a2a;
+  --color-error-border: #ff774c;
+  --color-error-background: #fff5f5;
+  --color-success-text: #3c5836;
+  --color-success-border: #3c5836;
+  --color-success-background: #f2f8f0;
+
+  --color-border-input: #f1f1f1;
+  --color-border-input-hover: #f1f1f1;
+  --color-background-input: #f1f1f1;
+  --color-background-input-hover: #f1f1f1;
+  --color-placeholder-input: #3f3f3f;
+
+  /* ---------------------------------------------------------------------------
+     3. TYPOGRAPHY
+     --------------------------------------------------------------------------- */
+  /* Font families */
+  --font-body-family: "DM Sans", sans-serif;
+  --font-heading-family: "DM Sans", sans-serif;
+  --font-subtitle-family: "Roboto Mono", monospace;
+  --font-button-family: "Roboto Mono", monospace;
+  --font-heading-card-family: "DM Sans", sans-serif;
+  --font-text-card-family: "DM Sans", sans-serif;
+  --font-header-menu-family: "Roboto Mono", monospace;
+  --font-footer-menu-family: "DM Sans", sans-serif;
+  --font-popups-heading-family: "DM Sans", sans-serif;
+  --font-popups-text-family: "DM Sans", sans-serif;
+
+  /* Weights & styles */
+  --font-body-weight: 400;
+  --font-body-style: normal;
+  --font-heading-weight: 400;
+  --font-heading-style: normal;
+  --font-subtitle-weight: 500;
+  --font-subtitle-style: normal;
+  --font-button-weight: 500;
+  --font-button-style: normal;
+
+  /* Sizes (desktop; mobile overrides in @media below) */
+  --font-size-body: 16px;
+  --font-size-body-s: 14px;
+  --font-size-button: 12px;
+  --font-size-subtitle: 12px;
+  --font-size-heading-h1: 56px;
+  --font-size-heading-h2: 42px;
+  --font-size-heading-h3: 28px;
+  --font-size-heading-h4: 20px;
+  --font-size-heading-h5: 18px;
+  --font-size-heading-h6: 16px;
+  --font-size-card-heading: 20px;
+  --font-size-card-text: 14px;
+
+  /* Line heights */
+  --font-body-line-height: 1.5;     /* 150% */
+  --font-heading-line-height: 1.1;  /* 110% */
+
+  /* Letter spacing */
+  --font-body-letter-spacing: -0.1px;
+  --font-heading-letter-spacing: -0.3px;
+  --font-button-letter-spacing: 0.3px;
+  --font-subtitle-letter-spacing: 0.3px;
+  --font-badge-letter-spacing: -0.2px;
+  --font-menu-letter-spacing: 0.3px;
+  --font-big-menu-letter-spacing: -0.4px;
+
+  /* Text transforms */
+  --font-heading-text-transform: none;
+  --font-button-text-transform: uppercase;
+  --font-subtitle-text-transform: uppercase;
+
+  /* ---------------------------------------------------------------------------
+     4. SPACING & LAYOUT
+     --------------------------------------------------------------------------- */
+  --spaced-section: 160px;          /* mobile override below */
+  --announcement-height: 40px;
+  --header-height: 68px;
+  --breadcrumbs-height: 0px;
+  --scrollbar-width: 0px;
+
+  --container-padding: 50px;        /* left/right; mobile override below */
+  --container-max-width: 1440px;
+  --page-width: 1360px;             /* standard page max-width */
+  --page-padding: 50px;             /* standard page; mobile override below */
+  --page-narrow-width: 790px;
+  --page-narrow-padding: 56px;      /* mobile override below */
+
+  /* ---------------------------------------------------------------------------
+     5. RADIUS / SHADOW / OPACITY
+     --------------------------------------------------------------------------- */
+  --border-radius-main: 6px;
+  --border-radius-button: 100px;
+  --border-radius-badge: 30px;
+
+  --shadow-box: 0px 2px 20px 0px rgba(0, 0, 0, 0.06);
+
+  --alpha-link: 0.5;
+  --alpha-button-background: 1;
+  --alpha-button-border: 1;
+  --alpha-placeholder-input: 0.4;
+}
+
+/* =============================================================================
+   MOBILE OVERRIDES (responsive token values)
+   ============================================================================= */
+@media (max-width: 749px) {
+  :root {
+    --font-size-heading-h1: 32px;
+    --font-size-heading-h2: 30px;
+    --font-size-heading-h3: 20px;
+    --font-size-heading-h4: 19px;
+    /* h5 16->18? Figma lists 18/18; h6 16/16 — unchanged */
+
+    --spaced-section: 50px;
+    --container-padding: 20px;
+    --page-padding: 25px;
+    --page-narrow-padding: 25px;
+  }
+}
+
+/* =============================================================================
+   ALTERNATE COLOR SCHEMES
+   Apply via class on a wrapper, e.g. <section class="scheme-3"> … </section>
+   ============================================================================= */
+
+/* Scheme 2 — light, pure-white background */
+.scheme-2 {
+  --color-background: #ffffff;
+  --color-background-secondary: #f1f1f1;
+  --color-background-tertiary: #efefea;
+  --color-gradient-background: #ffffff;
+  --color-foreground: #3f3f3f;
+  --color-foreground-secondary: #6d6d6d;
+  --color-foreground-tertiary: #6d6d6d;
+  --color-foreground-title: #3f3f3f;
+  --color-button: #090909;
+  --color-button-hover: #3f3f3f;
+  --color-button-text: #ffffff;
+  --color-button-text-hover: #ffffff;
+  --color-button-secondary-background: #3f3f3f;
+  --color-button-secondary-background-hover: #090909;
+  --color-button-secondary-text: #ffffff;
+  --color-button-secondary-text-hover: #ffffff;
+  --color-button-tertiary-background: #ffffff;
+  --color-button-tertiary-background-hover: #ffffff;
+  --color-button-tertiary-text: #3f3f3f;
+  --color-button-tertiary-text-hover: #3f3f3f;
+  --color-card-price-new: #3f3f3f;
+  --color-card-price-old: #737373;
+  --color-accent: #3f3f3f;
+  --color-overlay: #f5f0ed;
+  --color-border: #dfdfdf;
+  --color-border-input: #f1f1f1;
+  --color-border-input-hover: #f1f1f1;
+  --color-background-input: #ffffff;
+  --color-background-input-hover: #ffffff;
+  --color-placeholder-input: #3f3f3f;
+}
+
+/* Scheme 3 — dark, grey (#3f3f3f) background */
+.scheme-3 {
+  --color-background: #3f3f3f;
+  --color-background-secondary: #535551;
+  --color-background-tertiary: #333333;
+  --color-gradient-background: #3f3f3f;
+  --color-foreground: #ffffff;
+  --color-foreground-secondary: #f9f9f9;
+  --color-foreground-tertiary: #ffffff;
+  --color-foreground-title: #ffffff;
+  --color-button: #f9f9f9;
+  --color-button-hover: #ffffff;
+  --color-button-text: #3f3f3f;
+  --color-button-text-hover: #3f3f3f;
+  --color-button-secondary-background: #3f3f3f;
+  --color-button-secondary-background-hover: #090909;
+  --color-button-secondary-text: #ffffff;
+  --color-button-secondary-text-hover: #ffffff;
+  --color-button-tertiary-background: #3f3f3f;
+  --color-button-tertiary-background-hover: #777777;
+  --color-button-tertiary-text: #f9f9f9;
+  --color-button-tertiary-text-hover: #f9f9f9;
+  --color-card-price-new: #ffffff;
+  --color-card-price-old: #e2e2e2;
+  --color-accent: #3f3f3f;
+  --color-overlay: #131313;
+  --color-border: #3e3e3e;
+  --color-border-input: #f1f1f1;
+  --color-border-input-hover: #f1f1f1;
+  --color-background-input: #3f3f3f;
+  --color-background-input-hover: #3f3f3f;
+  --color-placeholder-input: #ffffff;
+}
+
+/* Scheme 4 — dark, black (#090909) background */
+.scheme-4 {
+  --color-background: #090909;
+  --color-background-secondary: #3f3f3f;
+  --color-background-tertiary: #efefea;
+  --color-gradient-background: #090909;
+  --color-foreground: #ffffff;
+  --color-foreground-secondary: #f9f9f9;
+  --color-foreground-tertiary: #afafaf;
+  --color-foreground-title: #ffffff;
+  --color-button: #f9f9f9;
+  --color-button-hover: #ffffff;
+  --color-button-text: #3f3f3f;
+  --color-button-text-hover: #3f3f3f;
+  --color-button-secondary-background: #afafaf;
+  --color-button-secondary-background-hover: #3f3f3f;
+  --color-button-secondary-text: #ffffff;
+  --color-button-secondary-text-hover: #ffffff;
+  --color-button-tertiary-background: #ffffff;
+  --color-button-tertiary-background-hover: #ffffff;
+  --color-button-tertiary-text: #3f3f3f;
+  --color-button-tertiary-text-hover: #3f3f3f;
+  --color-card-price-new: #3f3f3f;
+  --color-card-price-old: #737373;
+  --color-accent: #3f3f3f;
+  --color-overlay: #131313;
+  --color-border: #3e3e3e;
+  --color-border-input: #ffffff;
+  --color-border-input-hover: #ffffff;
+  --color-background-input: #ffffff;
+  --color-background-input-hover: #ffffff;
+  --color-placeholder-input: #3f3f3f;
+}

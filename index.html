@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StarTech.com × Makro · Visual Blueprint</title>
+<style>
+:root {
+  --bg:#131210; --bg-elevated:#1c1a17;
+  --light:#F5F2ED; --text:#FFFFFF; --text-90:rgba(255,255,255,.90); --text-70:rgba(255,255,255,.70); --text-50:rgba(255,255,255,.50); --text-30:rgba(255,255,255,.30);
+  --text-dark:#131210; --text-dark-70:rgba(19,18,16,.70); --text-dark-50:rgba(19,18,16,.50);
+  --line:rgba(255,255,255,.08); --line-strong:rgba(255,255,255,.15); --line-subtle:rgba(255,255,255,.04);
+  --red:#E53935; --green:#4CAF50;
+  --font:'PP Neue Montreal',-apple-system,BlinkMacSystemFont,'Helvetica Neue','Inter',sans-serif;
+  --t-body-lg:1.0625rem; --t-body:1rem; --t-sm:.875rem; --t-xs:.75rem; --t-label:.6875rem; --t-h3:1.25rem; --t-display:clamp(2rem,4vw,3rem);
+  --tr-hero:-0.04em; --tr-display:-0.03em; --tr-label:.06em; --tr-body:-0.011em; --lh-body:1.55; --r-sm:3px; --ease-out:cubic-bezier(0.16,1,0.3,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html,body{overflow:hidden;height:100vh;-webkit-font-smoothing:antialiased;}
+body{font-family:var(--font);font-size:var(--t-body);line-height:var(--lh-body);letter-spacing:var(--tr-body);color:var(--text);background:var(--bg);}
+.progress{position:fixed;top:0;left:0;right:0;height:2px;z-index:100;background:var(--line);}
+.progress .fill{height:100%;background:var(--text);width:0%;transition:width 400ms var(--ease-out);}
+.slide-num{position:fixed;bottom:32px;right:40px;font-size:var(--t-label);letter-spacing:var(--tr-label);text-transform:uppercase;color:var(--text-50);z-index:100;font-variant-numeric:tabular-nums;mix-blend-mode:difference;}
+.nav-hint{position:fixed;bottom:32px;left:40px;font-size:10px;letter-spacing:var(--tr-label);text-transform:uppercase;color:var(--text-30);z-index:100;mix-blend-mode:difference;}
+.logo-fixed{position:fixed;top:28px;left:40px;font-size:16px;font-weight:500;letter-spacing:var(--tr-display);z-index:100;color:var(--text);mix-blend-mode:difference;}
+.logo-fixed .dot{color:var(--red);} .logo-fixed .client{color:var(--text-50);font-weight:400;margin-left:8px;}
+.slide{position:fixed;inset:0;width:100vw;height:100vh;display:flex;opacity:0;pointer-events:none;transition:opacity 500ms var(--ease-out),transform 500ms var(--ease-out);transform:translateY(20px);overflow:hidden;}
+.slide.active{opacity:1;pointer-events:auto;transform:translateY(0);}
+.slide.dark{background:var(--bg);color:var(--text);}
+.s-inner{width:100%;max-width:1200px;margin:0 auto;padding:60px 64px;display:flex;flex-direction:column;justify-content:center;}
+.eyebrow{font-size:var(--t-label);letter-spacing:var(--tr-label);text-transform:uppercase;margin-bottom:24px;color:var(--text-50);}
+.em{font-weight:400;color:var(--text-50);}
+.hdr{font-size:clamp(1.75rem,3vw,2.5rem);font-weight:400;letter-spacing:var(--tr-display);line-height:1.15;max-width:30ch;}
+.body-lg{font-size:var(--t-body-lg);color:var(--text-70);max-width:62ch;line-height:1.55;}
+.tagrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;}
+.chip{font-size:10px;letter-spacing:.03em;text-transform:uppercase;padding:5px 11px;border-radius:12px;border:1px solid var(--line-strong);color:var(--text-70);}
+.chip.new{color:var(--red);border-color:rgba(229,57,53,.35);}
+.cover .s-inner{gap:20px;} .cover h1{font-size:clamp(3rem,7vw,5.5rem);line-height:.92;letter-spacing:var(--tr-hero);font-weight:400;max-width:15ch;}
+.cover .sub{font-size:var(--t-body-lg);line-height:1.5;color:var(--text-70);max-width:60ch;margin-top:14px;}
+.cover .meta-row{display:flex;gap:48px;padding-top:36px;border-top:1px solid var(--line);margin-top:36px;flex-wrap:wrap;}
+.cover .meta-row .m{display:flex;flex-direction:column;gap:4px;} .cover .meta-row .k{font-size:10px;letter-spacing:var(--tr-label);text-transform:uppercase;color:var(--text-50);} .cover .meta-row .v{font-size:var(--t-sm);color:var(--text);}
+.pillars{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:8px;}
+.pillars.two{grid-template-columns:1fr 1fr;}
+.pillars .pillar{background:var(--bg);padding:26px 24px;display:flex;flex-direction:column;gap:12px;min-height:200px;}
+.pillars .pillar .num{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--red);}
+.pillars .pillar h3{font-size:var(--t-h3);font-weight:500;line-height:1.2;}
+.pillars .pillar p{font-size:var(--t-sm);color:var(--text-70);line-height:1.5;margin-top:auto;}
+.wf{display:flex;flex-direction:column;gap:0;margin-top:8px;}
+.wf .step{display:grid;grid-template-columns:110px 1fr;gap:20px;padding:13px 0;border-bottom:1px solid var(--line-subtle);}
+.wf .step:last-child{border-bottom:none;}
+.wf .step .n{font-size:var(--t-xs);color:var(--text-50);letter-spacing:var(--tr-label);text-transform:uppercase;padding-top:3px;}
+.wf .step .txt{font-size:var(--t-sm);color:var(--text-90);line-height:1.5;} .wf .step .txt b{font-weight:500;color:var(--text);}
+.wf .step.hero .txt b{color:var(--text);} .wf .step.hero .n{color:var(--red);}
+/* sitemap */
+.sitemap-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:6px;}
+.sm-col{background:var(--bg);padding:18px 18px 22px;display:flex;flex-direction:column;gap:11px;}
+.sm-col h4{font-size:10px;letter-spacing:var(--tr-label);text-transform:uppercase;color:var(--red);}
+.sm-col ul{list-style:none;display:flex;flex-direction:column;gap:6px;}
+.sm-col li{font-size:var(--t-sm);color:var(--text-90);line-height:1.35;}
+.sm-col li .nw{font-size:8.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--red);border:1px solid rgba(229,57,53,.4);border-radius:8px;padding:1px 5px;margin-left:6px;}
+.sm-col li .sub{color:var(--text-50);font-size:var(--t-xs);}
+.sm-home{display:inline-flex;align-items:center;gap:10px;font-size:var(--t-sm);color:var(--text-70);margin-bottom:14px;} .sm-home b{color:var(--text);font-weight:500;}
+/* journey (live scrollable wireframes) */
+.journey-slide .s-inner{max-width:none;margin:0;padding:40px 0 26px 64px;height:100vh;justify-content:flex-start;}
+.journey-slide .eyebrow{margin-bottom:12px;}
+.journey-slide .hdr{margin-bottom:4px;}
+.journey-hint{font-size:var(--t-xs);color:var(--text-50);margin:8px 0 16px;}
+.journey-hint b{color:var(--text-90);font-weight:450;}
+.journey{display:flex;gap:22px;overflow-x:auto;overflow-y:hidden;padding:0 64px 14px 0;height:calc(100vh - 200px);scrollbar-width:thin;scrollbar-color:var(--line-strong) transparent;}
+.journey::-webkit-scrollbar{height:10px;}
+.journey::-webkit-scrollbar-thumb{background:var(--line-strong);border-radius:6px;}
+.journey::-webkit-scrollbar-track{background:transparent;}
+.device{flex:0 0 1080px;min-width:0;max-width:1080px;display:flex;flex-direction:column;height:100%;}
+.device .cap{display:flex;align-items:center;gap:12px;padding:0 4px 10px;}
+.device .cap .step{width:22px;height:22px;border-radius:50%;border:1px solid var(--red);color:var(--red);display:flex;align-items:center;justify-content:center;font-size:11px;flex:0 0 auto;font-variant-numeric:tabular-nums;}
+.device .cap .name{font-size:var(--t-sm);color:var(--text-90);font-weight:450;}
+.device .cap .url{font-size:var(--t-xs);color:var(--text-50);}
+.device .cap .tag{font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:var(--red);border:1px solid rgba(229,57,53,.4);border-radius:8px;padding:1px 6px;margin-left:auto;}
+.device .frame{flex:1;min-height:0;min-width:0;width:1080px;box-sizing:border-box;border:1px solid var(--line-strong);border-radius:8px;overflow:hidden;background:#f9f9f9;position:relative;}
+/* render each page at true 1440px desktop width, then scale to fit the frame */
+.device iframe{width:1440px;height:calc(100% / 0.75);border:0;display:block;background:#f9f9f9;transform:scale(0.75);transform-origin:top left;}
+/* closing */
+.closing .s-inner{gap:28px;align-items:flex-start;}
+.closing h2{font-size:clamp(2.4rem,5vw,3.8rem);line-height:.98;letter-spacing:var(--tr-hero);font-weight:400;max-width:22ch;}
+.closing .outcomes{display:flex;flex-direction:column;gap:0;margin-top:12px;border-top:1px solid var(--line);width:100%;}
+.closing .outcomes .o{display:grid;grid-template-columns:48px 1fr;gap:20px;padding:15px 0;border-bottom:1px solid var(--line-subtle);}
+.closing .outcomes .o .n{font-size:var(--t-xs);color:var(--text-50);letter-spacing:var(--tr-label);text-transform:uppercase;font-variant-numeric:tabular-nums;padding-top:3px;}
+.closing .outcomes .o .txt{font-size:var(--t-body);color:var(--text-90);line-height:1.4;}
+.closing .next{margin-top:26px;font-size:var(--t-sm);color:var(--text-50);padding-top:22px;border-top:1px solid var(--line);width:100%;}
+</style>
+</head>
+<body>
+<div class="progress"><div class="fill" id="progressFill"></div></div>
+<div class="logo-fixed">makro<span class="dot">.</span><span class="client">× StarTech.com</span></div>
+<div class="slide-num" id="slideNum">01 / 12</div>
+<div class="nav-hint">← → or click to navigate</div>
+
+<!-- 1 · COVER -->
+<div class="slide dark cover active" data-slide="1"><div class="s-inner">
+  <span class="eyebrow">Visual Blueprint · StarTech.com × Makro</span>
+  <h1>The storefront, page by page<span class="em">.</span></h1>
+  <p class="sub">How your site could come together on Shopify Plus, page for page, with the specific moments we would sharpen. These are wireframes: the structure and flow, not the built site and not the final brand.</p>
+  <div class="meta-row">
+    <div class="m"><span class="k">For</span><span class="v">Brad Kent · Michael Barber</span></div>
+    <div class="m"><span class="k">Go-live</span><span class="v">December 1, 2026</span></div>
+    <div class="m"><span class="k">Approach</span><span class="v">Lift and shift, with UX elevation</span></div>
+  </div>
+</div></div>
+
+<!-- 2 · HOW TO READ -->
+<div class="slide dark" data-slide="2"><div class="s-inner" style="gap:24px;">
+  <span class="eyebrow">A quick word first</span>
+  <h2 class="hdr">Wireframes, not the finished site.</h2>
+  <p class="body-lg">These are the structure and flow of each page, not the built site and not the final design. Grey boxes stand in for product images, and the brand look comes later. The product names, specs and prices are pulled from your live site. Each page mirrors what you run today, and only a few moments are elevated.</p>
+  <div class="tagrow"><span class="chip">Mirror the current page</span><span class="chip">Elevate only scoped moments</span><span class="chip new">Two net-new pages: search and compare</span></div>
+</div></div>
+
+<!-- 3 · SETTING THE STAGE -->
+<div class="slide dark" data-slide="3"><div class="s-inner" style="gap:26px;">
+  <span class="eyebrow">Setting the stage</span>
+  <h2 class="hdr">Three inputs shaped every page.</h2>
+  <div class="pillars">
+    <div class="pillar"><span class="num">01 · The audit</span><h3>Your live site, read closely</h3><p>We reviewed startech.com page by page through a behavioral-UX lens, so every change answers a real friction, not a preference.</p></div>
+    <div class="pillar"><span class="num">02 · The requirements</span><h3>The scope we are aligning on</h3><p>Each page reflects the business requirements you are reviewing, so the pages and the requirements stay in step as you sign them off.</p></div>
+    <div class="pillar"><span class="num">03 · Ready to build</span><h3>These become the real store</h3><p>The wireframes sit on a working design system, so as the brand and content land they carry straight into the build, not throwaway sketches.</p></div>
+  </div>
+</div></div>
+
+<!-- 4 · THE DISCIPLINE -->
+<div class="slide dark" data-slide="4"><div class="s-inner" style="gap:24px;">
+  <span class="eyebrow">The discipline</span>
+  <h2 class="hdr">Lift and shift, not a rebuild.</h2>
+  <p class="body-lg">We are not redrawing your site. Most of every page is exactly what you run today, rebuilt in the new system. We elevate only a few moments, the ones where a small change makes a real difference. Two things are genuinely new, because you do not have them today: a real search, and product compare.</p>
+  <div class="tagrow"><span class="chip">Small changes, big difference</span><span class="chip">Nothing added that you do not have</span><span class="chip new">Search and compare are net-new</span></div>
+</div></div>
+
+<!-- 5 · SITEMAP -->
+<div class="slide dark" data-slide="5"><div class="s-inner" style="gap:16px;max-width:1280px;">
+  <span class="eyebrow">The launch site</span>
+  <h2 class="hdr" style="max-width:40ch;">Your whole site, launching intact.</h2>
+  <div class="sm-home"><b>Home</b> <span style="color:var(--text-50)">· global header, mega-menu, utility bar and footer wrap every page</span></div>
+  <div class="sitemap-grid">
+    <div class="sm-col"><h4>Shop</h4><ul><li>Category hubs</li><li>Collections <span class="sub">(product list)</span></li><li>Product page</li><li>Search <span class="nw">New</span></li><li>Compare <span class="nw">New</span></li></ul></div>
+    <div class="sm-col"><h4>Buy &amp; B2B</h4><ul><li>Volume quote</li><li>Quick order pad</li><li>Where to buy</li><li>Become a partner</li><li>Cart &middot; Checkout</li></ul></div>
+    <div class="sm-col"><h4>Account <span class="sub">(signed in)</span></h4><ul><li>Orders &amp; reorder</li><li>Saved lists</li><li>Addresses &amp; users</li><li>Net terms &amp; invoices</li><li>Employee store</li></ul></div>
+    <div class="sm-col"><h4>Brands</h4><ul><li>Brand page &times; 6</li><li><span class="sub">shared template, CMS-editable</span></li></ul></div>
+    <div class="sm-col"><h4>Support</h4><ul><li>Knowledge base</li><li>Drivers &amp; downloads</li><li>Contact</li><li>Returns (RMA)</li><li>Warranty &middot; FAQ</li></ul></div>
+    <div class="sm-col"><h4>Company</h4><ul><li>Who we are</li><li>Sustainability</li><li>Learn / Blog</li><li>News</li></ul></div>
+    <div class="sm-col"><h4>Markets</h4><ul><li>4 selling locales</li><li>22 browse locales</li><li>Where-to-buy path</li><li>Localized SEO redirects</li></ul></div>
+    <div class="sm-col"><h4>Legal</h4><ul><li>Privacy</li><li>Terms</li><li>Cookies</li><li>Accessibility</li></ul></div>
+  </div>
+</div></div>
+
+<!-- 6 · FLOWS OVERVIEW -->
+<div class="slide dark" data-slide="6"><div class="s-inner" style="gap:24px;">
+  <span class="eyebrow">How people move</span>
+  <h2 class="hdr">Four ways buyers move through the site.</h2>
+  <div class="pillars two">
+    <div class="pillar"><span class="num">Flow 1 · about 70% of volume</span><h3>Find and buy</h3><p>Arrive, find the exact part by search or category, confirm it fits, add to cart, check out.</p></div>
+    <div class="pillar"><span class="num">Flow 2 · the B2B lead</span><h3>Volume quote</h3><p>A business or reseller submits a bulk quote without an account, on one sector-aware form.</p></div>
+    <div class="pillar"><span class="num">Flow 3 · the repeat buyer</span><h3>Bulk reorder</h3><p>A signed-in business buyer pastes a part-number list and orders in seconds.</p></div>
+    <div class="pillar"><span class="num">Flow 4 · the browse markets</span><h3>Research, then reseller</h3><p>In the 22 non-selling markets, the buyer researches and is routed to an authorized reseller.</p></div>
+  </div>
+</div></div>
+
+<!-- 7 · JOURNEY 1 -->
+<div class="slide dark journey-slide" data-slide="7"><div class="s-inner">
+  <span class="eyebrow">Flow 1 · Find and buy · about 70% of volume</span>
+  <h2 class="hdr">From a problem to the right part.</h2>
+  <div class="journey">
+    <figure class="device"><figcaption class="cap"><span class="step">1</span><span class="name">Homepage</span><span class="url">/ home</span><span class="tag">lift</span></figcaption><div class="frame"><iframe data-src="wireframes/homepage.html" title="Homepage"></iframe></div></figure>
+    <figure class="device"><figcaption class="cap"><span class="step">2</span><span class="name">Search</span><span class="url">/ search</span><span class="tag">new</span></figcaption><div class="frame"><iframe data-src="wireframes/search.html" title="Search"></iframe></div></figure>
+    <figure class="device"><figcaption class="cap"><span class="step">3</span><span class="name">Category hub</span><span class="url">/ docking-stations-multiports</span><span class="tag">lift</span></figcaption><div class="frame"><iframe data-src="wireframes/category.html" title="Category hub"></iframe></div></figure>
+    <figure class="device"><figcaption class="cap"><span class="step">4</span><span class="name">Product page</span><span class="url">/ dk31c2dhspd</span><span class="tag">lift</span></figcaption><div class="frame"><iframe data-src="wireframes/product.html" title="Product page"></iframe></div></figure>
+    <figure class="device"><figcaption class="cap"><span class="step">5</span><span class="name">Compare</span><span class="url">/ compare</span><span class="tag">new</span></figcaption><div class="frame"><iframe data-src="wireframes/compare.html" title="Compare"></iframe></div></figure>
+    <figure class="device"><figcaption class="cap"><span class="step">6</span><span class="name">Cart flyout</span><span class="url">add to cart</span><span class="tag">lift</span></figcaption><div class="frame"><iframe data-src="wireframes/cart-flyout.html" title="Cart flyout"></iframe></div></figure>
+  </div>
+</div></div>
+
+<!-- 8 · JOURNEY 2 -->
+<div class="slide dark journey-slide" data-slide="8"><div class="s-inner">
+  <span class="eyebrow">Flow 2 · Volume quote · the B2B lead</span>
+  <h2 class="hdr">One form, every kind of buyer.</h2>
+  <div class="journey">
+    <figure class="device"><figcaption class="cap"><span class="step">1</span><span class="name">Homepage</span><span class="url">the "Get a volume quote" path</span><span class="tag">lift</span></figcaption><div class="frame"><iframe data-src="wireframes/homepage.html" title="Homepage"></iframe></div></figure>
+    <figure class="device"><figcaption class="cap"><span class="step">2</span><span class="name">Volume quote form</span><span class="url">/ volume-quote</span><span class="tag">lift</span></figcaption><div class="frame"><iframe data-src="wireframes/volume-quote.html" title="Volume quote form"></iframe></div></figure>
+  </div>
+</div></div>
+
+<!-- 9 · JOURNEY 3 -->
+<div class="slide dark journey-slide" data-slide="9"><div class="s-inner">
+  <span class="eyebrow">Flow 3 · Bulk reorder · the repeat buyer</span>
+  <h2 class="hdr">They know the part numbers.</h2>
+  <div class="journey">
+    <figure class="device"><figcaption class="cap"><span class="step">1</span><span class="name">Quick order pad</span><span class="url">/ quick-order</span><span class="tag">lift</span></figcaption><div class="frame"><iframe data-src="wireframes/quick-order.html" title="Quick order pad"></iframe></div></figure>
+    <figure class="device"><figcaption class="cap"><span class="step">2</span><span class="name">Cart flyout</span><span class="url">matched lines added</span><span class="tag">lift</span></figcaption><div class="frame"><iframe data-src="wireframes/cart-flyout.html" title="Cart flyout"></iframe></div></figure>
+  </div>
+</div></div>
+
+<!-- 10 · JOURNEY 4 -->
+<div class="slide dark journey-slide" data-slide="10"><div class="s-inner">
+  <span class="eyebrow">Flow 4 · Research, then reseller · the browse markets</span>
+  <h2 class="hdr">Most markets buy from a reseller.</h2>
+  <div class="journey">
+    <figure class="device"><figcaption class="cap"><span class="step">1</span><span class="name">Product page</span><span class="url">/ dk31c2dhspd</span><span class="tag">lift</span></figcaption><div class="frame"><iframe data-src="wireframes/product.html" title="Product page"></iframe></div></figure>
+    <figure class="device"><figcaption class="cap"><span class="step">2</span><span class="name">Where to buy</span><span class="url">/ where-to-buy</span><span class="tag">lift</span></figcaption><div class="frame"><iframe data-src="wireframes/where-to-buy.html" title="Where to buy"></iframe></div></figure>
+  </div>
+</div></div>
+
+<!-- 11 · WHAT WE ELEVATED -->
+<div class="slide dark" data-slide="11"><div class="s-inner" style="gap:20px;">
+  <span class="eyebrow">In one view</span>
+  <h2 class="hdr">Nine pages. Two new, the rest sharpened.</h2>
+  <div class="wf" style="max-width:70ch;">
+    <div class="step"><span class="n">Home</span><span class="txt">Search-led hero, B2B paths up in the nav, proof at the first action</span></div>
+    <div class="step hero"><span class="n">Search</span><span class="txt"><b>Net-new.</b> Part-number-first, one product one result, in your list layout</span></div>
+    <div class="step"><span class="n">Category</span><span class="txt">Cards first, marketing copy below</span></div>
+    <div class="step"><span class="n">Product</span><span class="txt">Cleaner buy-box, per-warehouse stock, a clear compatibility line, add to compare</span></div>
+    <div class="step hero"><span class="n">Compare</span><span class="txt"><b>Net-new.</b> Every spec shown, the differences highlighted</span></div>
+    <div class="step"><span class="n">Cart</span><span class="txt">A slide-in drawer on add-to-cart, so you keep browsing</span></div>
+    <div class="step"><span class="n">Quote</span><span class="txt">Request-type first, then only that path, with bulk entry</span></div>
+    <div class="step"><span class="n">Reorder</span><span class="txt">Paste or upload, parse and price, add matched to cart</span></div>
+    <div class="step"><span class="n">Where to buy</span><span class="txt">The reseller directory, faithful to today, reachable from every browse market</span></div>
+  </div>
+</div></div>
+
+<!-- 12 · CLOSING -->
+<div class="slide dark closing" data-slide="12"><div class="s-inner">
+  <span class="eyebrow">From here</span>
+  <h2>Confirm the pages, and we move to design and build.</h2>
+  <div class="outcomes">
+    <div class="o"><span class="n">01</span><span class="txt">Walk the nine pages and the four flows, and tell us where a page should read differently.</span></div>
+    <div class="o"><span class="n">02</span><span class="txt">Confirm the two net-new pages, search and compare, as the moments to invest in.</span></div>
+    <div class="o"><span class="n">03</span><span class="txt">On sign-off, these hand to design for the brand, then into the build.</span></div>
+  </div>
+  <p class="next">Send your reactions on any page, and we fold them in before design begins.</p>
+</div></div>
+
+<script>
+const slides=document.querySelectorAll('.slide');const total=slides.length;let current=0;
+function loadFrames(slide){slide.querySelectorAll('iframe[data-src]').forEach(f=>{if(!f.getAttribute('src')){f.setAttribute('src',f.getAttribute('data-src'));}});}
+function goTo(idx){if(idx<0||idx>=total)return;slides[current].classList.remove('active');current=idx;slides[current].classList.add('active');loadFrames(slides[current]);
+document.getElementById('slideNum').textContent=String(current+1).padStart(2,'0')+' / '+String(total).padStart(2,'0');
+document.getElementById('progressFill').style.width=((current+1)/total*100)+'%';}
+document.addEventListener('keydown',(e)=>{if(e.key==='ArrowRight'){e.preventDefault();goTo(current+1);}if(e.key==='ArrowLeft'){e.preventDefault();goTo(current-1);}if(e.key==='ArrowDown'){e.preventDefault();goTo(current+1);}if(e.key==='ArrowUp'){e.preventDefault();goTo(current-1);}});
+document.addEventListener('click',(e)=>{if(e.target.closest('a')||e.target.closest('.journey'))return;const x=e.clientX;if(x>window.innerWidth*0.5)goTo(current+1);else goTo(current-1);});
+document.getElementById('slideNum').textContent='01 / '+String(total).padStart(2,'0');
+document.getElementById('progressFill').style.width=(1/total*100)+'%';
+loadFrames(document.querySelector('.slide.active')||slides[0]);
+</script>
+</body>
+</html>

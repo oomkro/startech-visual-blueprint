@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>StarTech.com - Compare (net-new)</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="shell.css">
+<style>
+  .util{display:flex;align-items:center;justify-content:flex-end;gap:24px;padding:10px var(--container-padding);
+    font-family:var(--font-subtitle-family);font-size:11px;letter-spacing:.3px;text-transform:uppercase;color:var(--color-foreground-secondary);}
+  .util a{color:inherit;text-decoration:none;}
+  .wrap{max-width:var(--container-max-width);margin-inline:auto;padding:36px var(--container-padding) 60px;}
+  .crumb{font-family:var(--font-subtitle-family);font-size:11px;letter-spacing:.3px;text-transform:uppercase;color:var(--color-foreground-secondary);margin-bottom:12px;}
+  .chead{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:24px;}
+  .chead p{margin:8px 0 0;color:var(--color-foreground-secondary);max-width:52ch;}
+  .toolbar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 20px;margin-bottom:4px;
+    background:var(--color-background-secondary);border:1px solid var(--color-border);border-radius:var(--border-radius-main);}
+  .toolbar .hidden-note{font-size:var(--font-size-body-s);color:var(--color-foreground-secondary);}
+  .toolbar .hidden-note b{color:var(--color-foreground-title);}
+  .toggle{display:inline-flex;align-items:center;gap:12px;font-family:var(--font-button-family);font-size:12px;letter-spacing:.3px;text-transform:uppercase;color:var(--color-foreground);}
+  .switch{width:42px;height:24px;border-radius:100px;background:var(--color-button);position:relative;}
+  .switch::after{content:"";position:absolute;top:3px;right:3px;width:18px;height:18px;border-radius:50%;background:var(--color-button-text);}
+  /* table as CSS grid: label column + 4 product columns */
+  .ctable{--cols:200px repeat(4,1fr);border:1px solid var(--color-border);border-top:0;border-radius:0 0 var(--border-radius-main) var(--border-radius-main);overflow:hidden;background:var(--color-background-secondary);}
+  .crow{display:grid;grid-template-columns:var(--cols);}
+  .crow + .crow{border-top:1px solid var(--color-border);}
+  .prodrow{background:var(--color-background);}
+  .cell{padding:16px 18px;font-size:var(--font-size-body-s);}
+  .cell.lab{font-family:var(--font-subtitle-family);font-size:11px;letter-spacing:.3px;text-transform:uppercase;color:var(--color-foreground-secondary);display:flex;align-items:center;}
+  .cell + .cell{border-left:1px solid var(--color-border);}
+  .prodcell{padding:18px;}
+  .prodcell .ws-box{aspect-ratio:4/3;margin-bottom:14px;}
+  .prodcell .part{font-family:var(--font-subtitle-family);font-size:10px;letter-spacing:.3px;text-transform:uppercase;color:var(--color-foreground-secondary);margin:0 0 5px;}
+  .prodcell h3{font-size:16px;line-height:1.15;margin:0 0 8px;}
+  .prodcell .price{font-size:var(--font-size-body);margin:0 0 12px;}
+  .prodcell .btn{width:100%;}
+  .cell .best{display:inline-flex;align-items:center;gap:6px;font-weight:700;color:var(--color-foreground-title);}
+  /* highlight version: differing rows stay full-contrast, matching rows recede */
+  .crow.diff .cell.lab{color:var(--color-foreground-title);}
+  .crow.diff .cell{color:var(--color-foreground-title);}
+  .crow.same{background:var(--color-background-tertiary);}
+  .crow.same .cell,.crow.same .cell.lab{color:var(--color-foreground-tertiary);}
+  .cell.subhead{grid-column:1/-1;font-family:var(--font-subtitle-family);font-size:10px;letter-spacing:.3px;text-transform:uppercase;color:var(--color-foreground-tertiary);background:var(--color-background-tertiary);padding:11px 18px;border-top:1px solid var(--color-border);}
+  .switch.off{background:var(--color-border);}
+  .switch.off::after{right:auto;left:3px;}
+  @media(max-width:749px){.ctable{overflow-x:auto}.crow{grid-template-columns:140px repeat(4,180px)}}
+</style>
+</head>
+<body>
+
+  <div class="util"><a>🌐 United States ▾</a><a>English ▾</a><a>Drivers &amp; Downloads</a><a>Log in</a><a>Cart (0)</a></div>
+
+  <div class="nav"><div class="nav__card">
+    <div class="nav__left"><a class="nav__logo">StarTech.com</a>
+      <nav class="nav__list"><a class="nav__item">Product</a><a class="nav__item">Support</a><a class="nav__item">Who We Are</a><a class="nav__item">Learn</a></nav>
+    </div>
+    <div class="nav__right"><a class="btn btn--tertiary">Get a volume quote</a><a class="btn btn--tertiary">Where to buy</a></div>
+  </div></div>
+
+  <!-- COMPARE - net-new. Hide identical rows so only the deciding differences remain. -->
+  <div class="wrap">
+    <div class="crumb">Docking Stations &amp; Multiports / Compare</div>
+    <div class="chead">
+      <div><h1 class="ws-h2">Compare 4 docking stations</h1></div>
+    </div>
+
+    <div class="toolbar">
+      <span class="hidden-note">Every spec shown. <b>The specs that differ are highlighted;</b> the five that match across all four are muted below.</span>
+      <span class="toggle">Differences only <span class="switch off"></span></span>
+    </div>
+
+    <div class="ctable">
+      <!-- product header row -->
+      <div class="crow prodrow">
+        <div class="cell lab" style="align-items:flex-end;padding-bottom:20px;">Docking stations</div>
+        <div class="cell prodcell"><div class="ws-box" data-label="product"></div><p class="part">DK31C2DHSPD</p><h3 class="pc-name">Triple 4K USB-C Dock</h3><p class="price">$177.99</p><button class="btn btn--tertiary">Add to cart</button></div>
+        <div class="cell prodcell"><div class="ws-box" data-label="product"></div><p class="part">150N-USB4DOCK-TRIPLE</p><h3 class="pc-name">USB4 Triple-4K 60Hz Dock</h3><p class="price">$193.99</p><button class="btn btn--tertiary">Add to cart</button></div>
+        <div class="cell prodcell"><div class="ws-box" data-label="product"></div><p class="part">DK30CH2DPPD</p><h3 class="pc-name">USB-C Triple Dock, Mac &amp; Win</h3><p class="price">$126.99</p><button class="btn btn--tertiary">Add to cart</button></div>
+        <div class="cell prodcell"><div class="ws-box" data-label="product"></div><p class="part">DK30C2DPEP</p><h3 class="pc-name">Hybrid USB-C/USB-A Dual-4K Dock</h3><p class="price">$258.99</p><button class="btn btn--tertiary">Add to cart</button></div>
+      </div>
+      <!-- best-for recommendation per product (REQ-02-20 AC-4) -->
+      <div class="crow diff"><div class="cell lab">Best for</div><div class="cell"><b>Windows / Chrome triple 4K</b></div><div class="cell"><b>USB4 laptops, 4K 60Hz</b></div><div class="cell"><b>MacBook + Windows fleets</b></div><div class="cell"><b>Older USB-A laptops</b></div></div>
+      <!-- the specs that differ, ordered by what decides the purchase -->
+      <div class="crow diff"><div class="cell lab">Host connection</div><div class="cell">USB-C (10Gbps)</div><div class="cell">USB4 (40Gbps)</div><div class="cell">USB-C</div><div class="cell">Hybrid USB-C + USB-A</div></div>
+      <div class="crow diff"><div class="cell lab">Displays</div><div class="cell">3 displays</div><div class="cell">3 displays</div><div class="cell">3 displays</div><div class="cell">2 displays</div></div>
+      <div class="crow diff"><div class="cell lab">Max resolution</div><div class="cell">Triple 4K 30Hz</div><div class="cell">Triple 4K 60Hz</div><div class="cell">Triple 4K 60Hz</div><div class="cell">Dual 4K 60Hz</div></div>
+      <div class="crow diff"><div class="cell lab">Power delivery</div><div class="cell">100W</div><div class="cell">100W</div><div class="cell">60W</div><div class="cell">100W</div></div>
+      <div class="crow diff"><div class="cell lab">Ethernet</div><div class="cell">Gigabit</div><div class="cell">2.5 Gigabit</div><div class="cell">Gigabit</div><div class="cell">Gigabit</div></div>
+      <div class="crow diff"><div class="cell lab">OS support</div><div class="cell">Windows, Chrome</div><div class="cell">Windows, Chrome</div><div class="cell">Windows, macOS, Chrome</div><div class="cell">Windows, macOS, Chrome</div></div>
+      <div class="crow diff"><div class="cell lab">Driver setup</div><div class="cell">Driver-free</div><div class="cell">Driver-free</div><div class="cell">DisplayLink</div><div class="cell">DisplayLink</div></div>
+      <div class="crow diff"><div class="cell lab">Amazon rating</div><div class="cell">150 reviews</div><div class="cell">New</div><div class="cell">113 reviews</div><div class="cell">55 reviews</div></div>
+      <div class="crow diff"><div class="cell lab">Price</div><div class="cell">$177.99</div><div class="cell">$193.99</div><div class="cell">$126.99</div><div class="cell">$258.99</div></div>
+      <!-- specs identical across all four, kept visible but muted for reassurance -->
+      <div class="crow"><div class="cell subhead">Same across all four</div></div>
+      <div class="crow same"><div class="cell lab">Warranty</div><div class="cell">3 years</div><div class="cell">3 years</div><div class="cell">3 years</div><div class="cell">3 years</div></div>
+      <div class="crow same"><div class="cell lab">TAA compliant</div><div class="cell">Yes</div><div class="cell">Yes</div><div class="cell">Yes</div><div class="cell">Yes</div></div>
+      <div class="crow same"><div class="cell lab">Audio port</div><div class="cell">3.5mm</div><div class="cell">3.5mm</div><div class="cell">3.5mm</div><div class="cell">3.5mm</div></div>
+      <div class="crow same"><div class="cell lab">Fast-charge ports</div><div class="cell">Yes</div><div class="cell">Yes</div><div class="cell">Yes</div><div class="cell">Yes</div></div>
+      <div class="crow same"><div class="cell lab">Security lock</div><div class="cell">Kensington</div><div class="cell">Kensington</div><div class="cell">Kensington</div><div class="cell">Kensington</div></div>
+    </div>
+  </div>
+
+</body>
+</html>

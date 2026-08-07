@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>StarTech.com - Homepage (elevated)</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="shell.css">
+<style>
+  /* Page composition on top of the design system. All values are tokens. */
+  .util{display:flex;align-items:center;justify-content:flex-end;gap:24px;
+    padding:10px var(--container-padding);font-family:var(--font-subtitle-family);
+    font-size:11px;letter-spacing:.3px;text-transform:uppercase;color:var(--color-foreground-secondary);}
+  .util a{color:inherit;text-decoration:none;}
+  .nav__search{display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:0 18px;
+    border:.5px solid var(--color-border);border-radius:var(--border-radius-button);
+    background:var(--color-background-input);color:var(--color-foreground-secondary);
+    font-family:var(--font-body-family);font-size:var(--font-size-body-s);}
+  .hero{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;
+    padding:64px var(--container-padding) 72px;}
+  .hero__eyebrow{color:var(--color-foreground-secondary);margin-bottom:22px;}
+  .hero h1{max-width:13ch;margin:0 0 18px;}
+  .hero__lead{font-size:var(--font-size-body);color:var(--color-foreground-secondary);max-width:46ch;margin:0 0 24px;}
+  .hero__search{display:flex;align-items:center;gap:10px;max-width:500px;
+    background:var(--color-background-secondary);border:1px solid var(--color-border);
+    border-radius:var(--border-radius-button);padding:6px 6px 6px 22px;box-shadow:var(--shadow-box);}
+  .hero__search input{flex:1;border:0;background:transparent;outline:0;
+    font-family:var(--font-body-family);font-size:var(--font-size-body-s);color:var(--color-foreground);}
+  .hero__examples{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:14px;max-width:520px;
+    font-family:var(--font-subtitle-family);font-size:10px;letter-spacing:.3px;text-transform:uppercase;color:var(--color-foreground-tertiary);}
+  .chip{display:inline-flex;align-items:center;padding:6px 12px;border-radius:var(--border-radius-button);
+    border:.5px solid var(--color-border);background:var(--color-background-secondary);color:var(--color-foreground-secondary);
+    text-transform:none;font-family:var(--font-body-family);font-size:12px;letter-spacing:0;text-decoration:none;}
+  .hero__ctas{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap;}
+  .hero__trust{display:inline-flex;align-items:center;gap:9px;margin-top:24px;
+    font-family:var(--font-subtitle-family);font-size:12px;letter-spacing:.3px;color:var(--color-foreground);}
+  .hero__trust .tick{width:18px;height:18px;border-radius:50%;background:var(--color-success-background);
+    color:var(--color-success-text);display:inline-flex;align-items:center;justify-content:center;font-size:10px;}
+  .hero__media{aspect-ratio:4/3;}
+  .section{padding:8px var(--container-padding) 0;}
+  .sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:26px;}
+  .tabs{display:inline-flex;gap:8px;}
+  .tab{padding:11px 18px;border-radius:var(--border-radius-button);border:.5px solid var(--color-border);
+    background:transparent;font-family:var(--font-button-family);font-size:12px;letter-spacing:.3px;
+    text-transform:uppercase;color:var(--color-foreground-secondary);cursor:pointer;}
+  .tab--on{background:var(--color-button);color:var(--color-button-text);border-color:var(--color-button);}
+  .cat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+  .cat .ws-box{aspect-ratio:1/1;margin-bottom:14px;}
+  .cat h3{font-size:var(--font-size-card-heading);margin:0 0 5px;}
+  .cat p{margin:0;color:var(--color-foreground-secondary);font-size:var(--font-size-body-s);}
+  .trust{margin-top:80px;padding:52px var(--container-padding);background:var(--color-background-secondary);
+    border-block:1px solid var(--color-border);text-align:center;}
+  .trust .lab{font-family:var(--font-subtitle-family);font-size:12px;letter-spacing:.3px;text-transform:uppercase;
+    color:var(--color-foreground-secondary);margin-bottom:26px;}
+  .trust__logos{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;max-width:920px;margin:0 auto;}
+  .trust__logos .ws-box{width:124px;height:40px;}
+  .reviews{padding-top:80px;}
+  .review-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+  .review-card{border:1px solid var(--color-border);border-radius:var(--border-radius-main);
+    background:var(--color-background-secondary);padding:24px;display:flex;flex-direction:column;gap:14px;min-height:200px;}
+  .review-card .stars{color:#e8a13a;letter-spacing:2px;font-size:14px;}
+  .review-card p{margin:0;font-size:var(--font-size-body-s);line-height:1.5;color:var(--color-foreground);}
+  .review-card .who{margin-top:auto;display:flex;flex-direction:column;gap:3px;}
+  .review-card .who strong{color:var(--color-foreground-title);font-size:14px;}
+  .review-card .who span{color:var(--color-foreground-secondary);font-family:var(--font-subtitle-family);
+    font-size:10px;text-transform:uppercase;letter-spacing:.3px;}
+  .newsletter{margin-top:80px;padding:56px var(--container-padding);background:var(--color-background-tertiary);
+    display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap;}
+  .newsletter h2{margin:0 0 8px;}
+  .newsletter p{margin:0;color:var(--color-foreground-secondary);}
+  .news__form{display:flex;gap:10px;align-items:center;background:var(--color-background-secondary);
+    border:1px solid var(--color-border);border-radius:var(--border-radius-button);padding:6px 6px 6px 22px;
+    min-width:380px;box-shadow:var(--shadow-box);}
+  .news__form input{flex:1;border:0;background:transparent;outline:0;
+    font-family:var(--font-body-family);font-size:var(--font-size-body-s);}
+  @media(max-width:749px){.hero{grid-template-columns:1fr;gap:32px;padding-block:40px}
+    .cat-grid,.review-grid{grid-template-columns:1fr 1fr}.news__form{min-width:0;width:100%}}
+</style>
+</head>
+<body>
+
+  <div class="util">
+    <a>🌐 United States ▾</a><a>English ▾</a><a>Drivers &amp; Downloads</a><a>Log in</a><a>Cart (0)</a>
+  </div>
+
+  <div class="nav">
+    <div class="nav__card">
+      <div class="nav__left">
+        <a class="nav__logo">StarTech.com</a>
+        <nav class="nav__list">
+          <a class="nav__item">Product</a><a class="nav__item">Support</a>
+          <a class="nav__item">Who We Are</a><a class="nav__item">Learn</a>
+        </nav>
+      </div>
+      <div class="nav__right">
+        <span class="nav__search">🔍 Search anything</span>
+        <a class="btn btn--tertiary">Get a volume quote</a>
+        <a class="btn btn--tertiary">Where to buy</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO - elevated: static, search-led, three paths, trust at the CTA -->
+  <section class="hero">
+    <div>
+      <p class="ws-subtitle ws-eyebrow hero__eyebrow">Hard-to-find made easy</p>
+      <h1 class="ws-h1">Find the exact connectivity part. Fast.</h1>
+      <p class="hero__lead">Docks, hubs, adapters and cables for IT and A/V professionals.</p>
+      <div class="hero__search">
+        <input placeholder="Search anything: part number, product, spec, or use case" />
+        <button class="btn btn--primary">Search</button>
+      </div>
+      <div class="hero__ctas">
+        <a class="btn btn--tertiary">Get a volume quote</a>
+        <a class="btn btn--tertiary">Find a reseller</a>
+      </div>
+      <span class="hero__trust"><span class="tick">✓</span> Trusted by 90% of Fortune 500</span>
+    </div>
+    <div class="ws-box hero__media" data-label="USB4 docking station"></div>
+  </section>
+
+  <!-- CATEGORIES - mirrored: their Popular Categories / New & Featured module -->
+  <section class="section">
+    <div class="sec-head">
+      <div class="tabs"><button class="tab tab--on">Popular Categories</button><button class="tab">New &amp; Featured</button></div>
+      <a class="ws-subtitle" style="color:var(--color-foreground-secondary);text-decoration:none">View all →</a>
+    </div>
+    <div class="cat-grid">
+      <div class="cat"><div class="ws-box" data-label="Docking stations"></div><h3 class="pc-name">Docking Stations &amp; Multiports</h3></div>
+      <div class="cat"><div class="ws-box" data-label="USB hubs"></div><h3 class="pc-name">USB Hubs</h3></div>
+      <div class="cat"><div class="ws-box" data-label="Display adapters"></div><h3 class="pc-name">Display &amp; Video Adapters</h3></div>
+      <div class="cat"><div class="ws-box" data-label="Cables"></div><h3 class="pc-name">Cables</h3></div>
+    </div>
+  </section>
+
+  <!-- TRUST - mirrored: Fortune 500 band (the compact line also rides at the hero CTA) -->
+  <section class="trust">
+    <div class="lab">Trusted by 90% of Fortune 500 companies</div>
+    <div class="trust__logos">
+      <div class="ws-box" data-label="logo"></div><div class="ws-box" data-label="logo"></div>
+      <div class="ws-box" data-label="logo"></div><div class="ws-box" data-label="logo"></div>
+      <div class="ws-box" data-label="logo"></div><div class="ws-box" data-label="logo"></div>
+    </div>
+  </section>
+
+  <!-- REVIEWS - mirrored: their "What people are saying" section -->
+  <section class="section reviews">
+    <div class="sec-head">
+      <div><p class="ws-subtitle ws-eyebrow" style="color:var(--color-foreground-secondary)">Testimonials</p>
+        <h2 class="ws-h2" style="margin-top:14px">What people are saying</h2></div>
+      <a class="ws-subtitle" style="color:var(--color-foreground-secondary);text-decoration:none">‹ ›</a>
+    </div>
+    <div class="review-grid">
+      <div class="review-card"><p>"If I have said it once, I have said it a thousand times, I think you have some of the best customer service that I have encountered with any company. It makes me want to be a customer for life."</p><div class="who"><strong>Michael Z.</strong><span>Managing Director, Heidrun Meadery</span></div></div>
+      <div class="review-card"><p>"I've worked with most of the big players in my 34 years as a tech. None have been so easy going, or helpful, as this."</p><div class="who"><strong>Rik R.</strong><span>Owner, Jackson Telecom</span></div></div>
+      <div class="review-card"><p>"StarTech.com Support is really quite exceptional, especially when compared to other companies."</p><div class="who"><strong>Howard J.</strong><span>IT Consultant, HMJ Consulting</span></div></div>
+      <div class="review-card"><p>"Customer Service as it should always be, but rarely is elsewhere."</p><div class="who"><strong>Mike K.</strong><span>CIO, Kansas Spine &amp; Specialty Hospital</span></div></div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER - mirrored: their email signup -->
+  <section class="newsletter">
+    <div>
+      <h2 class="ws-h2">Email newsletter</h2>
+    </div>
+    <form class="news__form"><input placeholder="Email address" /><button class="btn btn--primary">Subscribe</button></form>
+  </section>
+
+  <footer class="footer">
+    <div class="footer__cols">
+      <div class="footer__brand">
+        <a class="nav__logo">StarTech.com</a>
+        <p class="footer__muted" style="max-width:36ch">Hard-to-find connectivity parts, made easy for IT and A/V professionals.</p>
+      </div>
+      <div class="footer__col"><h4 class="footer__heading">Product</h4><ul class="footer__list"><li><a>Docking stations</a></li><li><a>USB hubs</a></li><li><a>Cables</a></li><li><a>Drivers &amp; downloads</a></li></ul></div>
+      <div class="footer__col"><h4 class="footer__heading">Buy</h4><ul class="footer__list"><li><a>Get a volume quote</a></li><li><a>Where to buy</a></li><li><a>Quick order</a></li><li><a>Become a partner</a></li></ul></div>
+      <div class="footer__col"><h4 class="footer__heading">Support</h4><ul class="footer__list"><li><a>Knowledge base</a></li><li><a>Contact</a></li><li><a>Returns</a></li><li><a>Warranty</a></li></ul></div>
+    </div>
+    <div class="footer__bottom"><span class="footer__muted">© StarTech.com Ltd.</span><ul class="footer__policies"><li><a>Privacy</a></li><li><a>Terms</a></li></ul></div>
+  </footer>
+
+</body>
+</html>

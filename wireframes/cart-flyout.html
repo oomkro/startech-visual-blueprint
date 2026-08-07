@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>StarTech.com - Cart flyout (new)</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css"><link rel="stylesheet" href="shell.css">
+<style>
+  .util{display:flex;align-items:center;justify-content:flex-end;gap:24px;padding:10px var(--container-padding);font-family:var(--font-subtitle-family);font-size:11px;letter-spacing:.3px;text-transform:uppercase;color:var(--color-foreground-secondary);}
+  .util a{color:inherit;text-decoration:none;}
+  /* faint page behind the drawer */
+  .backdrop-page{padding:40px var(--container-padding);}
+  .backdrop-page .big{aspect-ratio:21/9;margin-top:20px;}
+  .overlay{position:fixed;inset:0;background:rgba(9,9,9,.42);z-index:5;}
+  .drawer{position:fixed;top:0;right:0;bottom:0;width:432px;max-width:92vw;background:var(--color-background-secondary);
+    box-shadow:-4px 0 40px rgba(0,0,0,.2);z-index:6;display:flex;flex-direction:column;}
+  .dhead{display:flex;align-items:center;justify-content:space-between;padding:22px 24px;border-bottom:1px solid var(--color-border);}
+  .dhead h2{font-size:var(--font-size-heading-h4);margin:0;}
+  .dhead .x{font-size:20px;color:var(--color-foreground-secondary);}
+  .ship{padding:18px 24px;border-bottom:1px solid var(--color-border);}
+  .ship .t{font-size:var(--font-size-body-s);margin-bottom:10px;}
+  .ship .t b{color:var(--color-success-text);}
+  .bar{height:6px;border-radius:100px;background:var(--color-background-tertiary);overflow:hidden;}
+  .bar i{display:block;height:100%;width:100%;background:var(--color-success-border);}
+  .items{flex:1;overflow:auto;padding:8px 24px;}
+  .item{display:grid;grid-template-columns:72px 1fr;gap:16px;padding:18px 0;border-bottom:1px solid var(--color-border);}
+  .item .ws-box{width:72px;aspect-ratio:1/1;}
+  .item .part{font-family:var(--font-subtitle-family);font-size:10px;letter-spacing:.3px;text-transform:uppercase;color:var(--color-foreground-secondary);margin:0 0 4px;}
+  .item h3{font-size:15px;line-height:1.2;margin:0 0 10px;}
+  .item .row{display:flex;align-items:center;justify-content:space-between;}
+  .qty{display:inline-flex;align-items:center;border:1px solid var(--color-border);border-radius:var(--border-radius-button);}
+  .qty span{padding:7px 11px;} .qty .num{min-width:34px;text-align:center;border-inline:1px solid var(--color-border);}
+  .item .price{font-size:var(--font-size-body);}
+  .item .rm{font-family:var(--font-subtitle-family);font-size:10px;letter-spacing:.3px;text-transform:uppercase;color:var(--color-foreground-secondary);margin-top:8px;display:inline-block;}
+  .dfoot{border-top:1px solid var(--color-border);padding:20px 24px 24px;}
+  .subtotal{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;}
+  .subtotal .s{font-size:var(--font-size-heading-h4);}
+  .taxnote{font-size:12px;color:var(--color-foreground-secondary);margin-bottom:16px;}
+  .dfoot .btn{width:100%;margin-bottom:10px;}
+</style>
+</head>
+<body>
+  <!-- faint page behind -->
+  <div class="backdrop-page">
+    <div class="util"><a>🌐 United States ▾</a><a>English ▾</a><a>Drivers &amp; Downloads</a><a>Log in</a><a>Cart (3)</a></div>
+    <div class="nav"><div class="nav__card">
+      <div class="nav__left"><a class="nav__logo">StarTech.com</a><nav class="nav__list"><a class="nav__item">Product</a><a class="nav__item">Support</a><a class="nav__item">Who We Are</a><a class="nav__item">Learn</a></nav></div>
+      <div class="nav__right"><span style="opacity:.6">🔍 Search anything</span><a class="btn btn--tertiary">Get a volume quote</a><a class="btn btn--tertiary">Where to buy</a></div>
+    </div></div>
+    <div class="ws-box big" data-label="product page behind"></div>
+  </div>
+
+  <div class="overlay"></div>
+
+  <!-- CART FLYOUT - new: a drawer on add-to-cart, running context, free-shipping cue -->
+  <aside class="drawer">
+    <div class="dhead"><h2 class="ws-h3">Added to cart</h2><span class="x">✕</span></div>
+
+    <div class="ship">
+      <div class="t"><b>✓ In stock.</b> Ships from US warehouse.</div>
+    </div>
+
+    <div class="items">
+      <div class="item"><div class="ws-box" data-label=""></div>
+        <div><p class="part">DK31C2DHSPD</p><h3 class="pc-name">Triple 4K USB-C Docking Station</h3>
+          <div class="row"><div class="qty"><span>−</span><span class="num">1</span><span>+</span></div><span class="price">$177.99</span></div>
+          <span class="rm">Remove</span></div></div>
+      <div class="item"><div class="ws-box" data-label=""></div>
+        <div><p class="part">USB31CCV50CM</p><h3 class="pc-name">USB-C Cable, 10Gbps, 100W PD, 50cm</h3>
+          <div class="row"><div class="qty"><span>−</span><span class="num">2</span><span>+</span></div><span class="price">$43.02</span></div>
+          <span class="rm">Remove</span></div></div>
+    </div>
+
+    <div class="dfoot">
+      <div class="subtotal"><span>Subtotal · 3 items</span><span class="s">$221.01</span></div>
+      <div class="taxnote">Shipping and tax calculated at checkout.</div>
+      <button class="btn btn--primary">Checkout</button>
+      <button class="btn btn--tertiary">View cart</button>
+    </div>
+  </aside>
+</body>
+</html>

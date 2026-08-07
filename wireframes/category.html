@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>StarTech.com - Category hub (elevated)</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css"><link rel="stylesheet" href="shell.css">
+<style>
+  .util{display:flex;align-items:center;justify-content:flex-end;gap:24px;padding:10px var(--container-padding);font-family:var(--font-subtitle-family);font-size:11px;letter-spacing:.3px;text-transform:uppercase;color:var(--color-foreground-secondary);}
+  .util a{color:inherit;text-decoration:none;}
+  .wrap{max-width:var(--container-max-width);margin-inline:auto;padding:32px var(--container-padding) 20px;}
+  .crumb{font-family:var(--font-subtitle-family);font-size:11px;letter-spacing:.3px;text-transform:uppercase;color:var(--color-foreground-secondary);margin-bottom:14px;}
+  .lead{color:var(--color-foreground-secondary);max-width:60ch;margin:12px 0 32px;font-size:var(--font-size-body);}
+  .subs{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
+  .subcard{border:1px solid var(--color-border);border-radius:var(--border-radius-main);overflow:hidden;background:var(--color-background-secondary);}
+  .subcard .ws-box{aspect-ratio:16/10;border-radius:0;}
+  .subcard .b{padding:20px;}
+  .subcard h3{font-size:var(--font-size-card-heading);margin:0 0 4px;}
+  .subcard p{margin:0;color:var(--color-foreground-secondary);font-size:var(--font-size-body-s);}
+  .about{margin-top:64px;padding-top:40px;border-top:1px solid var(--color-border);display:grid;grid-template-columns:1fr 1fr;gap:56px;}
+  .about h2{margin:0 0 16px;}
+  .about p{color:var(--color-foreground-secondary);margin:0 0 14px;}
+  .about ul{margin:0;padding-left:18px;color:var(--color-foreground-secondary);}
+  .about li{margin-bottom:8px;}
+  @media(max-width:749px){.subs{grid-template-columns:1fr 1fr}.about{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+  <div class="util"><a>🌐 United States ▾</a><a>English ▾</a><a>Drivers &amp; Downloads</a><a>Log in</a><a>Cart (0)</a></div>
+  <div class="nav"><div class="nav__card">
+    <div class="nav__left"><a class="nav__logo">StarTech.com</a>
+      <nav class="nav__list"><a class="nav__item">Product</a><a class="nav__item">Support</a><a class="nav__item">Who We Are</a><a class="nav__item">Learn</a></nav></div>
+    <div class="nav__right"><span style="opacity:.6">🔍 Search anything</span><a class="btn btn--tertiary">Get a volume quote</a><a class="btn btn--tertiary">Where to buy</a></div>
+  </div></div>
+
+  <!-- CATEGORY HUB - elevated: the sub-category cards come first (the decision), prose moves below -->
+  <div class="wrap">
+    <div class="crumb">Product / Docking Stations &amp; Multiports</div>
+    <h1 class="ws-h2">Docking Stations &amp; Multiports</h1>
+
+    <div class="subs">
+      <a class="subcard"><div class="ws-box" data-label="Thunderbolt docks"></div><div class="b"><h3 class="pc-name">Thunderbolt Docking Stations</h3></div></a>
+      <a class="subcard"><div class="ws-box" data-label="USB-C docks"></div><div class="b"><h3 class="pc-name">USB-C Docking Stations</h3></div></a>
+      <a class="subcard"><div class="ws-box" data-label="USB-C multiport"></div><div class="b"><h3 class="pc-name">USB-C Multiport Adapters</h3></div></a>
+      <a class="subcard"><div class="ws-box" data-label="USB-A docks"></div><div class="b"><h3 class="pc-name">USB-A Docking Stations</h3></div></a>
+    </div>
+
+    <!-- their marketing copy, verbatim, moved below the cards -->
+    <section class="about">
+      <div>
+        <p>StarTech.com Universal Docking Stations are broadly compatible, offering hybrid USB-C and USB-A host connections, flexible monitor connector types, and various power delivery options.</p>
+        <p>Our comprehensive portfolio of Docks offers a solution for virtually any workstation application, including traditional office workstations, Hot-Desks, Work-From-Home and Boardroom connectivity.</p>
+      </div>
+      <div>
+        <h2 class="ws-h3">Laptop Docks that Deliver IT Pro Performance</h2>
+        <p>Thoughtfully engineered for the IT pro, StarTech.com performance laptop docks reduce help desk support, simplify deployment and include features not found on consumer-grade models.</p>
+        <ul>
+          <li>Simplified management</li>
+          <li>Enhanced security</li>
+          <li>Universal compatibility</li>
+        </ul>
+      </div>
+    </section>
+  </div>
+
+  <footer class="footer" style="margin-top:64px">
+    <div class="footer__bottom" style="border-top:1px solid var(--color-border)"><span class="footer__muted">© StarTech.com Ltd.</span><ul class="footer__policies"><li><a>Privacy</a></li><li><a>Terms</a></li></ul></div>
+  </footer>
+</body>
+</html>
