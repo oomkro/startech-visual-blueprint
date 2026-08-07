@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>StarTech.com - PDP data map (Salsify fields, verified)</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css"><link rel="stylesheet" href="shell.css">
+<style>
+  body{background:#fff;}
+  .dm-wrap{max-width:1200px;margin-inline:auto;padding:36px 40px 70px;}
+  .dm-head h1{font-size:26px;margin:0 0 8px;line-height:1.15;}
+  .dm-head p.intro{color:var(--color-foreground-secondary);max-width:98ch;margin:0 0 4px;font-size:var(--font-size-body-s);line-height:1.5;}
+  .dm-head p.src{color:var(--color-foreground-tertiary);font-size:12px;margin:8px 0 0;line-height:1.5;}
+  .verified{margin:16px 0 6px;padding:14px 18px;border:1px solid rgba(37,100,40,.3);background:rgba(46,125,50,.05);border-radius:var(--border-radius-main);font-size:12.5px;color:#256428;line-height:1.5;}
+  .verified b{font-weight:600;}
+  .legend{display:flex;gap:20px;flex-wrap:wrap;margin:18px 0 28px;padding:14px 18px;border:1px solid var(--color-border);border-radius:var(--border-radius-main);background:var(--color-background-secondary);}
+  .legend .lg{display:inline-flex;align-items:center;gap:8px;font-size:12px;color:var(--color-foreground);}
+  .ld{width:14px;height:14px;border-radius:50%;flex:0 0 auto;}
+  .g{background:#2e7d32;} .b{background:#1565c0;} .a{background:#e08600;} .r{background:#c62828;}
+  .tag{display:inline-flex;align-items:center;gap:6px;padding:3px 9px;border-radius:5px;font-family:'Roboto Mono',monospace;font-size:10.5px;line-height:1.35;border:1px solid;margin-top:6px;max-width:100%;}
+  .tag .td{width:7px;height:7px;border-radius:50%;flex:0 0 auto;}
+  .tag.tg{color:#256428;border-color:rgba(46,125,50,.4);background:rgba(46,125,50,.06);}
+  .tag.tb{color:#12508f;border-color:rgba(21,101,192,.4);background:rgba(21,101,192,.06);}
+  .tag.ta{color:#9a5b00;border-color:rgba(224,134,0,.5);background:rgba(224,134,0,.09);}
+  .tag.tr{color:#b02020;border-color:rgba(198,40,40,.4);background:rgba(198,40,40,.06);}
+  .tagline{display:block;}
+  .mock{border:1px solid var(--color-border);border-radius:var(--border-radius-main);overflow:hidden;margin-bottom:36px;background:#f9f9f9;}
+  .m-util{display:flex;justify-content:flex-end;gap:20px;padding:9px 20px;font-family:var(--font-subtitle-family);font-size:10px;letter-spacing:.3px;text-transform:uppercase;color:var(--color-foreground-secondary);}
+  .m-nav{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:#fff;border-block:1px solid var(--color-border);}
+  .m-nav b{font-size:15px;} .m-nav .r-nav{font-family:var(--font-subtitle-family);font-size:10px;letter-spacing:.3px;text-transform:uppercase;color:var(--color-foreground-secondary);}
+  .m-banner{display:flex;align-items:center;gap:12px;padding:11px 20px;background:var(--color-foreground-title);color:#fff;font-size:13px;flex-wrap:wrap;}
+  .m-body{display:grid;grid-template-columns:.85fr 1.15fr;gap:34px;padding:22px 24px 8px;align-items:start;}
+  .m-gallery .gbig{aspect-ratio:4/3;background:#eaeae5;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#9a9a92;font-size:12px;margin-bottom:10px;}
+  .m-thumbs{display:flex;gap:8px;} .m-thumbs .gb{width:52px;aspect-ratio:1/1;background:#eaeae5;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:9px;color:#9a9a92;}
+  .el{margin-bottom:14px;}
+  .m-buy .part{font-family:var(--font-subtitle-family);font-size:11px;letter-spacing:.3px;text-transform:uppercase;color:var(--color-foreground-secondary);margin:0;}
+  .m-buy h2{font-size:19px;line-height:1.18;margin:0;}
+  .rate{color:#e8a13a;} .rate span{color:var(--color-foreground-secondary);}
+  .m-badges{display:flex;gap:6px;flex-wrap:wrap;}
+  .m-badges span{padding:5px 10px;border:.5px solid var(--color-border);border-radius:100px;font-size:9px;letter-spacing:.3px;text-transform:uppercase;color:var(--color-foreground-secondary);}
+  .m-price{font-size:23px;margin:0;}
+  .m-stock{color:#2e7d32;font-size:var(--font-size-body-s);}
+  .m-hand{font-size:12px;color:var(--color-foreground-secondary);}
+  .m-cta{display:flex;gap:10px;margin:4px 0;} .m-cta .btnp{flex:1;text-align:center;padding:11px;border-radius:100px;background:#090909;color:#fff;font-family:var(--font-subtitle-family);font-size:11px;letter-spacing:.3px;text-transform:uppercase;} .m-cta .btnt{flex:1;text-align:center;padding:11px;border-radius:100px;border:1px solid var(--color-border);font-family:var(--font-subtitle-family);font-size:11px;letter-spacing:.3px;text-transform:uppercase;color:var(--color-foreground);}
+  .m-acc{border:1px solid var(--color-border);border-radius:8px;padding:11px 14px;display:flex;align-items:center;justify-content:space-between;font-family:var(--font-subtitle-family);font-size:11px;letter-spacing:.3px;text-transform:uppercase;background:#fff;}
+  .m-sec{padding:18px 24px;border-top:1px solid var(--color-border);}
+  .m-sec h3{font-size:15px;margin:0 0 8px;}
+  .m-tabs{display:flex;gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--color-border);padding-bottom:10px;margin-bottom:14px;}
+  .m-tabs span{font-family:var(--font-subtitle-family);font-size:10px;letter-spacing:.3px;text-transform:uppercase;color:var(--color-foreground-secondary);}
+  .m-tabs span.on{color:var(--color-foreground-title);border-bottom:2px solid #090909;padding-bottom:8px;margin-bottom:-11px;}
+  .tabmap{display:flex;flex-direction:column;gap:9px;}
+  .tabmap .row{display:grid;grid-template-columns:190px 1fr;gap:14px;align-items:start;}
+  .tabmap .row .lbl{font-family:var(--font-subtitle-family);font-size:11px;letter-spacing:.3px;text-transform:uppercase;color:var(--color-foreground-title);padding-top:4px;}
+  .tabmap .row .tags{display:flex;flex-wrap:wrap;gap:6px;}
+  .tabmap .row .tags .tag{margin-top:0;}
+  .m-rel{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;} .m-rel .gb{aspect-ratio:1/1;background:#eaeae5;border-radius:4px;}
+  .gaps{margin-top:8px;border:1px solid var(--color-border);border-radius:var(--border-radius-main);background:var(--color-background-secondary);padding:20px 24px;}
+  .gaps h2{font-size:16px;margin:0 0 12px;}
+  .gaps ul{margin:0;padding-left:20px;} .gaps li{margin-bottom:9px;font-size:13px;line-height:1.45;} .gaps li b{font-weight:600;}
+  .gaps .gd{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:middle;}
+</style>
+</head>
+<body>
+<div class="dm-wrap">
+  <div class="dm-head">
+    <h1>Product page: our lift-and-shift design, mapped to Salsify</h1>
+    <p class="intro">Each element carries the Salsify field that powers it, right on the element. Green is a live field, blue is another system (F&amp;O, Bazaarvoice, DotData), amber is a mechanism still being built, red is a real gap.</p>
+    <p class="src">Checked against the live Salsify export, 3,074 attributes (req_salsify_category_export). John Bauer's PDP mapping was the starting point; he flagged it could be stale, and the live data confirms most of what he marked open is already covered by real fields. Working draft for alignment, not a final data spec.</p>
+  </div>
+
+  <div class="verified">
+    <b>What the live check changed.</b> Three of the gaps in the first draft are already real Salsify fields: the message banner is <b>Website Product Alert</b>, the compatibility list is <b>OS Compatibility</b> (with an <b>OS Compatibility Computed Property</b> that can pick which values show), and the A+ banner is <b>A+ Banner</b>. Only <b>safety measures</b> has no field at all. Everything else on the page maps to a live field or to F&amp;O / Bazaarvoice.
+  </div>
+
+  <div class="legend">
+    <span class="lg"><span class="ld g"></span> Live Salsify field</span>
+    <span class="lg"><span class="ld b"></span> Another system (F&amp;O, Bazaarvoice, DotData)</span>
+    <span class="lg"><span class="ld a"></span> Field exists, mechanism or decision in progress</span>
+    <span class="lg"><span class="ld r"></span> Real gap: no field today</span>
+  </div>
+
+  <div class="mock">
+    <div class="m-util"><span>Country / Language</span><span>Drivers &amp; Downloads</span><span>Log in</span><span>Cart</span></div>
+    <div class="m-nav"><b>StarTech.com</b><span class="r-nav">Product · Support · Who We Are · Learn · Search · Where to buy</span></div>
+    <div class="m-banner"><span>⚡ <b>Future-proof your technology.</b> Product message banner.</span><span class="tag tg" style="background:#fff"><span class="td g"></span>Salsify · Website Product Alert</span></div>
+
+    <div class="m-body">
+      <div class="m-gallery">
+        <div class="gbig">Product gallery</div>
+        <div class="m-thumbs"><span class="gb">img</span><span class="gb">▶ vid</span><span class="gb">img</span></div>
+        <span class="tag tg tagline" style="margin-top:10px"><span class="td g"></span>Salsify · Main Image / Product Images / Enhanced / Application Images</span>
+        <span class="tag tg tagline"><span class="td g"></span>Salsify · Video Link YouTube / Video Thumb</span>
+      </div>
+      <div class="m-buy">
+        <div class="el"><p class="part">DK31C2DHSPD</p><span class="tag tg tagline"><span class="td g"></span>Salsify · Product Number</span></div>
+        <div class="el"><h2>Triple 4K Monitor USB-C Docking Station with DP 1.4 &amp; 100W Power Delivery</h2><span class="tag tg tagline"><span class="td g"></span>Salsify · Product Title (Short / Medium / Long) + Website Product Headline</span></div>
+        <div class="el"><div class="rate">★★★★☆ <span>4.5 · 150 reviews · Amazon Rating</span></div><span class="tag tb tagline"><span class="td b"></span>Bazaarvoice</span></div>
+        <div class="el"><div class="m-badges"><span>✓ TAA compliant</span><span>Driver-free</span><span>3-year warranty</span></div><span class="tag tg tagline"><span class="td g"></span>Salsify · TAA Compliant + Warranty</span><span class="tag ta tagline"><span class="td a"></span>Driver-free: no flag today, derive from the Driver field</span></div>
+        <div class="el"><p class="m-price">$177.99 USD</p><span class="tag tb tagline"><span class="td b"></span>F&amp;O · price (not in Salsify)</span></div>
+        <div class="el"><div class="m-stock">● In stock · 3,855 units</div><span class="tag tb tagline"><span class="td b"></span>F&amp;O · inventory (not in Salsify)</span></div>
+        <div class="el"><div class="m-hand">Special handling: not eligible for free shipping</div><span class="tag tb tagline"><span class="td b"></span>F&amp;O / shipping logic (not in Salsify), confirm source</span></div>
+        <div class="m-cta"><span class="btnp">Add to cart</span><span class="btnt">Where to buy</span></div>
+        <div class="el" style="margin-top:8px"><div class="m-acc"><span>Compatibility</span><span>+</span></div><span class="tag tg tagline"><span class="td g"></span>Salsify · OS Compatibility (+ Computed Property picks which values show)</span></div>
+        <div class="el"><div class="m-acc"><span>Description</span><span>+</span></div><span class="tag tg tagline"><span class="td g"></span>Salsify · Marketing Copy + Bullet 1-5</span></div>
+      </div>
+    </div>
+
+    <div class="m-sec"><h3>What's in the box</h3><p style="color:var(--color-foreground-secondary);font-size:var(--font-size-body-s);margin:0">USB-C dock · Power adapter · … (see all 5)</p><span class="tag tg tagline"><span class="td g"></span>Salsify · Included in Package</span></div>
+
+    <div class="m-sec">
+      <div class="m-tabs"><span class="on">Product Description</span><span>Overview</span><span>Tech Specs</span><span>Drivers &amp; Downloads</span><span>FAQ &amp; Compliance</span><span>Accessories</span><span>Customer Q&amp;A</span></div>
+      <div class="tabmap">
+        <div class="row"><span class="lbl">Product Description</span><div class="tags"><span class="tag tg"><span class="td g"></span>Salsify · Marketing Copy + Bullet 1-5</span></div></div>
+        <div class="row"><span class="lbl">Detailed / A+ content</span><div class="tags"><span class="tag ta"><span class="td a"></span>Salsify · A+ Banner exists; deeper A+ content still WIP (John)</span></div></div>
+        <div class="row"><span class="lbl">Tech Specs</span><div class="tags"><span class="tag ta"><span class="td a"></span>Salsify · spec properties exist; the "At Tech Spec" flag + Salsify↔DotData connector are still being built</span></div></div>
+        <div class="row"><span class="lbl">Drivers &amp; Downloads</span><div class="tags"><span class="tag tg"><span class="td g"></span>Salsify · Driver / Manual / Diagram</span><span class="tag ta"><span class="td a"></span>per-model mapping + manual language to finalize</span></div></div>
+        <div class="row"><span class="lbl">FAQ &amp; Compliance</span><div class="tags"><span class="tag tb"><span class="td b"></span>Technical FAQs · DotData (0 FAQ fields in Salsify, confirmed)</span><span class="tag tg"><span class="td g"></span>TAA Compliant / Certification / Regulatory Approvals</span><span class="tag tr"><span class="td r"></span>Safety measures · no property (only MSDS)</span></div></div>
+        <div class="row"><span class="lbl">Accessories</span><div class="tags"><span class="tag tg"><span class="td g"></span>Salsify · Accessory Products</span></div></div>
+        <div class="row"><span class="lbl">Customer Q&amp;A</span><div class="tags"><span class="tag tb"><span class="td b"></span>Bazaarvoice</span></div></div>
+      </div>
+    </div>
+
+    <div class="m-sec"><h3>Accessories and related</h3><div class="m-rel"><span class="gb"></span><span class="gb"></span><span class="gb"></span><span class="gb"></span></div><span class="tag tg tagline"><span class="td g"></span>Salsify · Related Products / Accessory Products</span></div>
+  </div>
+
+  <div class="gaps">
+    <h2>Still open after the live check</h2>
+    <ul>
+      <li><span class="gd r"></span><b>Safety measures.</b> The only true gap. No property in Salsify (only the MSDS document). Decide whether to create one, or keep pulling from GDS / Manual.</li>
+      <li><span class="gd a"></span><b>Tech Specs mapping.</b> The spec properties exist, but the "At Tech Spec" flag and the Salsify-to-DotData connector are still being built (John's in-progress item).</li>
+      <li><span class="gd a"></span><b>Detailed / A+ content.</b> The A+ Banner field exists; the fuller A+ content structure is still work in progress.</li>
+      <li><span class="gd a"></span><b>Driver-free badge.</b> No dedicated flag. Derive it from whether the Driver field is populated, or add a small boolean.</li>
+      <li><span class="gd a"></span><b>OS compatibility display.</b> Not a missing field. Confirm the OS Compatibility Computed Property is the one we surface, so it does not become a wall of values.</li>
+      <li><span class="gd b"></span><b>Special-handling note.</b> Not a Salsify field. Confirm it is driven from F&amp;O / shipping logic so it shows only on the SKUs that ship separately.</li>
+    </ul>
+  </div>
+</div>
+</body>
+</html>
