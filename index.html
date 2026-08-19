@@ -79,6 +79,11 @@ body{font-family:var(--font);font-size:var(--t-body);line-height:var(--lh-body);
 .device .frame{flex:1;min-height:0;min-width:0;width:1080px;box-sizing:border-box;border:1px solid var(--line-strong);border-radius:8px;overflow:hidden;background:#f9f9f9;position:relative;}
 /* render each page at true 1440px desktop width, then scale to fit the frame */
 .device iframe{width:1440px;height:calc(100% / 0.75);border:0;display:block;background:#f9f9f9;transform:scale(0.75);transform-origin:top left;}
+/* review variant: two pages side by side, sized to fit the slide (also fits the PDF) */
+.journey.review{overflow-x:hidden;}
+.journey.review .device{flex:0 0 540px;max-width:540px;}
+.journey.review .frame{width:540px;}
+.journey.review iframe{transform:scale(0.375);height:calc(100% / 0.375);}
 /* closing */
 .closing .s-inner{gap:28px;align-items:flex-start;}
 .closing h2{font-size:clamp(2.4rem,5vw,3.8rem);line-height:.98;letter-spacing:var(--tr-hero);font-weight:400;max-width:22ch;}
@@ -212,7 +217,7 @@ body{font-family:var(--font);font-size:var(--t-body);line-height:var(--lh-body);
   <span class="eyebrow">In one view</span>
   <h2 class="hdr">Nine pages. Two new, the rest sharpened.</h2>
   <div class="wf" style="max-width:70ch;">
-    <div class="step"><span class="n">Home</span><span class="txt">Search-led hero, B2B paths up in the nav, proof at the first action</span></div>
+    <div class="step"><span class="n">Home</span><span class="txt">Permanent search-led hero with a campaign carousel, storytelling paths lead, categories below</span></div>
     <div class="step hero"><span class="n">Search</span><span class="txt"><b>Net-new.</b> Part-number-first, one product one result, in your list layout</span></div>
     <div class="step"><span class="n">Category</span><span class="txt">Cards first, marketing copy below</span></div>
     <div class="step"><span class="n">Product</span><span class="txt">Cleaner buy-box, per-warehouse stock, a clear compatibility line, add to compare</span></div>
@@ -224,8 +229,19 @@ body{font-family:var(--font);font-size:var(--t-body);line-height:var(--lh-body);
   </div>
 </div></div>
 
-<!-- 12 · CLOSING -->
-<div class="slide dark closing" data-slide="12"><div class="s-inner">
+<!-- 12 · FROM YOUR REVIEW -->
+<div class="slide dark journey-slide" data-slide="12"><div class="s-inner">
+  <span class="eyebrow">From your review</span>
+  <h2 class="hdr">Two things you raised, folded in.</h2>
+  <p class="journey-hint">The <b>hero</b> keeps one permanent headline and adds a campaign carousel that can change by market. The <b>product template</b> flexes from a single SKU to a whole family, length and color on one page.</p>
+  <div class="journey review">
+    <figure class="device"><figcaption class="cap"><span class="step">1</span><span class="name">Homepage hero</span><span class="url">permanent H1 · rotating campaigns</span><span class="tag">new</span></figcaption><div class="frame"><iframe data-src="wireframes/homepage.html" title="Homepage hero"></iframe></div></figure>
+    <figure class="device"><figcaption class="cap"><span class="step">2</span><span class="name">Product family</span><span class="url">/ cat6a · length + color</span><span class="tag">new</span></figcaption><div class="frame"><iframe data-src="wireframes/product-family.html" title="Product family"></iframe></div></figure>
+  </div>
+</div></div>
+
+<!-- 13 · CLOSING -->
+<div class="slide dark closing" data-slide="13"><div class="s-inner">
   <span class="eyebrow">From here</span>
   <h2>Confirm the pages, and we move to design and build.</h2>
   <div class="outcomes">
