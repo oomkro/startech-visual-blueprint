@@ -22,6 +22,15 @@
   .about p{color:var(--color-foreground-secondary);margin:0 0 14px;}
   .about ul{margin:0;padding-left:18px;color:var(--color-foreground-secondary);}
   .about li{margin-bottom:8px;}
+  /* resource/tools module: CMS-driven, the category template flexes to host it */
+  .finder{margin-top:40px;padding:28px 32px;border:1px solid var(--color-border);border-radius:var(--border-radius-main);background:var(--color-background-secondary);display:grid;grid-template-columns:1fr 1.4fr;gap:40px;align-items:center;}
+  .finder-eyebrow{font-family:var(--font-subtitle-family);font-size:10px;letter-spacing:.3px;text-transform:uppercase;color:var(--color-foreground-secondary);margin:0 0 8px;}
+  .finder-copy h2{margin:0 0 8px;} .finder-sub{margin:0;color:var(--color-foreground-secondary);font-size:var(--font-size-body-s);line-height:1.5;}
+  .finder-controls{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .finder-controls .btn{grid-column:1/-1;}
+  .fc label{display:block;font-family:var(--font-subtitle-family);font-size:10px;letter-spacing:.3px;text-transform:uppercase;color:var(--color-foreground-secondary);margin-bottom:6px;}
+  .fc-in{height:44px;border:1px solid var(--color-border-input);background:var(--color-background-input);border-radius:var(--border-radius-main);padding:0 14px;display:flex;align-items:center;justify-content:space-between;color:var(--color-foreground-tertiary);font-size:var(--font-size-body-s);}
+  @media(max-width:749px){.finder{grid-template-columns:1fr}}
   @media(max-width:749px){.subs{grid-template-columns:1fr 1fr}.about{grid-template-columns:1fr}}
 </style>
 </head>
@@ -44,6 +53,21 @@
       <a class="subcard"><div class="ws-box" data-label="USB-C multiport"></div><div class="b"><h3 class="pc-name">USB-C Multiport Adapters</h3></div></a>
       <a class="subcard"><div class="ws-box" data-label="USB-A docks"></div><div class="b"><h3 class="pc-name">USB-A Docking Stations</h3></div></a>
     </div>
+
+    <!-- resource/tools module: CMS-driven, no one-off build (answers category template-flexibility feedback) -->
+    <section class="finder">
+      <div class="finder-copy">
+        <p class="finder-eyebrow">Tools</p>
+        <h2 class="ws-h3">Find the right dock</h2>
+        <p class="finder-sub">Answer three quick questions and we'll match the docks that fit your setup.</p>
+      </div>
+      <div class="finder-controls">
+        <div class="fc"><label>Laptop connection</label><div class="fc-in">USB-C / Thunderbolt <span>▾</span></div></div>
+        <div class="fc"><label>Displays</label><div class="fc-in">Two 4K displays <span>▾</span></div></div>
+        <div class="fc"><label>Power delivery</label><div class="fc-in">100W <span>▾</span></div></div>
+        <button class="btn btn--primary">Find docks</button>
+      </div>
+    </section>
 
     <!-- their marketing copy, verbatim, moved below the cards -->
     <section class="about">

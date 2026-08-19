@@ -33,6 +33,8 @@
   .lrow .part{font-family:var(--font-subtitle-family);font-size:10px;letter-spacing:.3px;text-transform:uppercase;color:var(--color-foreground-secondary);margin:0 0 6px;}
   .lrow h3{font-size:var(--font-size-card-heading);line-height:1.15;margin:0 0 8px;}
   .lrow .specs{color:var(--color-foreground-secondary);font-size:var(--font-size-body-s);margin:0 0 12px;}
+  .lrow .rating{display:flex;align-items:center;gap:7px;margin:0 0 12px;font-size:12px;color:var(--color-foreground-secondary);}
+  .lrow .rating .rstars{color:#e8a13a;letter-spacing:2px;font-size:13px;} .lrow .rating .rh{opacity:.4;} .lrow .rating .rct{color:var(--color-foreground-tertiary);}
   .lrow .cmp{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-subtitle-family);font-size:10px;letter-spacing:.3px;text-transform:uppercase;color:var(--color-foreground-secondary);}
   .lrow .cmp .box{width:15px;height:15px;border:1px solid var(--color-border);border-radius:4px;}
   .lrow .cmp .box.on{background:var(--color-button);border-color:var(--color-button);}
@@ -84,8 +86,8 @@
         <label><span class="box"></span> 5K <span class="n">18</span></label>
         <label><span class="box"></span> 8K <span class="n">12</span></label></div>
       <div class="facet"><h4>Availability</h4>
-        <label><span class="box"></span> In stock, US <span class="n">150</span></label>
-        <label><span class="box"></span> In stock, CA <span class="n">131</span></label></div>
+        <label><span class="box on"></span> In stock <span class="n">285</span></label>
+        <label><span class="box"></span> Out of stock <span class="n">11</span></label></div>
     </aside>
 
     <div class="results-main">
@@ -98,17 +100,17 @@
 
       <div class="list">
         <div class="lrow"><div class="ws-box" data-label="product"></div>
-          <div><p class="part">DK31C2DHSPD</p><h3 class="pc-name">Triple 4K USB-C Docking Station</h3><p class="specs">USB-C · 3 displays · triple 4K 30Hz · 100W PD · 6 USB</p><span class="cmp"><span class="box on"></span> Compare</span></div>
-          <div class="buy"><p class="price">$177.99</p><p class="stock">In stock · US</p><button class="btn btn--tertiary">Add to cart</button></div></div>
+          <div><p class="part">DK31C2DHSPD</p><h3 class="pc-name">Triple 4K USB-C Docking Station</h3><p class="specs">USB-C · 3 displays · triple 4K 30Hz · 100W PD · 6 USB</p><p class="rating"><span class="rstars">★★★★<span class="rh">★</span></span> 4.5 <span class="rct">(809) · Amazon</span></p><span class="cmp"><span class="box on"></span> Compare</span></div>
+          <div class="buy"><p class="price">$177.99</p><p class="stock">In stock</p><button class="btn btn--tertiary">Add to cart</button></div></div>
         <div class="lrow"><div class="ws-box" data-label="product"></div>
-          <div><p class="part">150N-USB4DOCK-TRIPLE</p><h3 class="pc-name">USB4 Triple-Monitor Dock, 4K 60Hz</h3><p class="specs">USB4 · 3 displays · triple 4K 60Hz · 100W PD · 2.5GbE</p><span class="cmp"><span class="box on"></span> Compare</span></div>
-          <div class="buy"><p class="price">$193.99</p><p class="stock">In stock · US</p><button class="btn btn--tertiary">Add to cart</button></div></div>
+          <div><p class="part">150N-USB4DOCK-TRIPLE</p><h3 class="pc-name">USB4 Triple-Monitor Dock, 4K 60Hz</h3><p class="specs">USB4 · 3 displays · triple 4K 60Hz · 100W PD · 2.5GbE</p><p class="rating"><span class="rstars">★★★★<span class="rh">★</span></span> 4.5 <span class="rct">(212) · Amazon</span></p><span class="cmp"><span class="box on"></span> Compare</span></div>
+          <div class="buy"><p class="price">$193.99</p><p class="stock">In stock</p><button class="btn btn--tertiary">Add to cart</button></div></div>
         <div class="lrow"><div class="ws-box" data-label="product"></div>
-          <div><p class="part">DK30C2DPEP</p><h3 class="pc-name">Hybrid USB-C &amp; USB-A Dual-4K Dock</h3><p class="specs">USB-C / USB-A · 2 displays · dual 4K 60Hz · 100W PD</p><span class="cmp"><span class="box"></span> Compare</span></div>
-          <div class="buy"><p class="price">$258.99</p><p class="stock">In stock · US</p><button class="btn btn--tertiary">Add to cart</button></div></div>
+          <div><p class="part">DK30C2DPEP</p><h3 class="pc-name">Hybrid USB-C &amp; USB-A Dual-4K Dock</h3><p class="specs">USB-C / USB-A · 2 displays · dual 4K 60Hz · 100W PD</p><p class="rating"><span class="rstars">★★★★<span class="rh">★</span></span> 4.4 <span class="rct">(96) · Amazon</span></p><span class="cmp"><span class="box"></span> Compare</span></div>
+          <div class="buy"><p class="price">$258.99</p><p class="stock">In stock</p><button class="btn btn--tertiary">Add to cart</button></div></div>
         <div class="lrow"><div class="ws-box" data-label="product"></div>
-          <div><p class="part">DK30CH2DPPD</p><h3 class="pc-name">USB-C Triple Dock for MacBook &amp; Windows</h3><p class="specs">USB-C · 3 displays · 60W PD · Windows, macOS, Chrome</p><span class="cmp"><span class="box"></span> Compare</span></div>
-          <div class="buy"><p class="price">$126.99</p><p class="stock">In stock · US</p><button class="btn btn--tertiary">Add to cart</button></div></div>
+          <div><p class="part">DK30CH2DPPD</p><h3 class="pc-name">USB-C Triple Dock for MacBook &amp; Windows</h3><p class="specs">USB-C · 3 displays · 60W PD · Windows, macOS, Chrome</p><p class="rating"><span class="rstars">★★★★<span class="rh">★</span></span> 4.6 <span class="rct">(438) · Amazon</span></p><span class="cmp"><span class="box"></span> Compare</span></div>
+          <div class="buy"><p class="price">$126.99</p><p class="stock">In stock</p><button class="btn btn--tertiary">Add to cart</button></div></div>
       </div>
 
       <div class="pager"><span class="pg on">1</span><span class="pg">2</span><span class="pg">3</span><span class="pg">4</span><span class="pg">→</span></div>
