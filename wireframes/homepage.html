@@ -50,7 +50,8 @@
   .camp-pause{display:inline-flex;align-items:center;gap:7px;padding:0 14px;height:38px;
     border-radius:var(--border-radius-button);border:1px solid var(--color-border);background:var(--color-background);
     font-family:var(--font-subtitle-family);font-size:10px;letter-spacing:.3px;text-transform:uppercase;color:var(--color-foreground-secondary);}
-  .camp-slide{display:flex;align-items:center;gap:20px;flex:1;min-width:0;}
+  .camp-slide{display:none;}
+  .camp-slide.on{display:flex;align-items:center;gap:20px;flex:1;min-width:0;}
   .camp-thumb{width:132px;height:74px;flex-shrink:0;border-radius:var(--border-radius-main);}
   .camp-kicker{font-family:var(--font-subtitle-family);font-size:10px;letter-spacing:.3px;text-transform:uppercase;color:var(--color-foreground-secondary);margin:0 0 5px;}
   .camp-head{margin:0;font-size:var(--font-size-body);color:var(--color-foreground-title);line-height:1.35;max-width:54ch;}
@@ -149,11 +150,27 @@
         <button class="camp-arrow">›</button>
         <button class="camp-pause">❚❚ Pause</button>
       </div>
-      <div class="camp-slide">
+      <div class="camp-slide on">
         <div class="ws-box camp-thumb" data-label="Thunderbolt 5 dock"></div>
         <div>
           <p class="camp-kicker">New · Thunderbolt 5</p>
           <p class="camp-head">The Thunderbolt 5 Docking Station has landed, double the bandwidth of Thunderbolt 4.</p>
+        </div>
+        <a class="camp-more">Read more →</a>
+      </div>
+      <div class="camp-slide">
+        <div class="ws-box camp-thumb" data-label="USB4 dock"></div>
+        <div>
+          <p class="camp-kicker">USB4 docking</p>
+          <p class="camp-head">Driverless dual 4K on Mac, without the Thunderbolt 4 cost.</p>
+        </div>
+        <a class="camp-more">Read more →</a>
+      </div>
+      <div class="camp-slide">
+        <div class="ws-box camp-thumb" data-label="TAA compliant"></div>
+        <div>
+          <p class="camp-kicker">Government &amp; public sector</p>
+          <p class="camp-head">TAA-compliant connectivity, ready for federal and public-sector buyers.</p>
         </div>
         <a class="camp-more">Read more →</a>
       </div>
